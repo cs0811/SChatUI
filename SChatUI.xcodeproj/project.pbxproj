@@ -1,0 +1,557 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D41164491D49F95B000EEA8A /* SChatToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D41164481D49F95B000EEA8A /* SChatToolBar.m */; };
+		D411644E1D49FE47000EEA8A /* chat_bottom_up_nor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D411644A1D49FE47000EEA8A /* chat_bottom_up_nor@2x.png */; };
+		D41164511D49FE47000EEA8A /* chat_bottom_voice_press@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D411644D1D49FE47000EEA8A /* chat_bottom_voice_press@2x.png */; };
+		D41164531D49FFCF000EEA8A /* chat_bottom_keyboard_nor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D41164521D49FFCF000EEA8A /* chat_bottom_keyboard_nor@2x.png */; };
+		D41164551D4A08F5000EEA8A /* chat_bottom_textfield@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D41164541D4A08F5000EEA8A /* chat_bottom_textfield@2x.png */; };
+		D41164581D4A0C96000EEA8A /* STextField.m in Sources */ = {isa = PBXBuildFile; fileRef = D41164571D4A0C96000EEA8A /* STextField.m */; };
+		D411645A1D4A1538000EEA8A /* toolbar_bottom_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D41164591D4A1538000EEA8A /* toolbar_bottom_bar@2x.png */; };
+		D41AA4491D4AFA510027B545 /* SChatToolBarInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = D41AA4481D4AFA510027B545 /* SChatToolBarInputView.m */; };
+		D41AA44F1D4AFFB90027B545 /* UIResponder+Router.m in Sources */ = {isa = PBXBuildFile; fileRef = D41AA44E1D4AFFB90027B545 /* UIResponder+Router.m */; };
+		D41AA4511D4B26090027B545 /* chat_input_pic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D41AA4501D4B26090027B545 /* chat_input_pic@2x.png */; };
+		D4697F671D48809400138CB9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D4697F661D48809400138CB9 /* main.m */; };
+		D4697F6A1D48809400138CB9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D4697F691D48809400138CB9 /* AppDelegate.m */; };
+		D4697F6D1D48809400138CB9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4697F6C1D48809400138CB9 /* ViewController.m */; };
+		D4697F701D48809400138CB9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4697F6E1D48809400138CB9 /* Main.storyboard */; };
+		D4697F721D48809400138CB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4697F711D48809400138CB9 /* Assets.xcassets */; };
+		D4697F751D48809400138CB9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4697F731D48809400138CB9 /* LaunchScreen.storyboard */; };
+		D4697F811D4880FF00138CB9 /* SChatVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D4697F801D4880FF00138CB9 /* SChatVC.m */; };
+		D4697F851D4884DC00138CB9 /* ChatBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D4697F841D4884DC00138CB9 /* ChatBaseCell.m */; };
+		D4697F871D488CB000138CB9 /* cat.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D4697F861D488CB000138CB9 /* cat.jpg */; };
+		D4697F8B1D488E4700138CB9 /* ChatBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D4697F8A1D488E4700138CB9 /* ChatBaseModel.m */; };
+		D4697F911D48971300138CB9 /* receive_bubble_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4697F8F1D48971300138CB9 /* receive_bubble_normal@2x.png */; };
+		D4697F921D48971300138CB9 /* send_bubber_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4697F901D48971300138CB9 /* send_bubber_normal@2x.png */; };
+		D4697F951D489BA000138CB9 /* ChatTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D4697F941D489BA000138CB9 /* ChatTextCell.m */; };
+		D4697F981D489CBA00138CB9 /* ChatTextModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D4697F971D489CBA00138CB9 /* ChatTextModel.m */; };
+		D4697F9D1D48AC4E00138CB9 /* ChatImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D4697F9C1D48AC4E00138CB9 /* ChatImageCell.m */; };
+		D4697FA01D48AC6200138CB9 /* ChatImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D4697F9F1D48AC6200138CB9 /* ChatImageModel.m */; };
+		E5C47A684A6373E43B19ED9A /* libPods-SChatUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A4A2B6A7B0E3A2235C31A8 /* libPods-SChatUI.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		52A4A2B6A7B0E3A2235C31A8 /* libPods-SChatUI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SChatUI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		71414EC83CE8515FED3DEB40 /* Pods-SChatUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SChatUI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SChatUI/Pods-SChatUI.debug.xcconfig"; sourceTree = "<group>"; };
+		89D9E0B201F233D3E15F1D2C /* Pods-SChatUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SChatUI.release.xcconfig"; path = "Pods/Target Support Files/Pods-SChatUI/Pods-SChatUI.release.xcconfig"; sourceTree = "<group>"; };
+		D41164471D49F95B000EEA8A /* SChatToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SChatToolBar.h; sourceTree = "<group>"; };
+		D41164481D49F95B000EEA8A /* SChatToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SChatToolBar.m; sourceTree = "<group>"; };
+		D411644A1D49FE47000EEA8A /* chat_bottom_up_nor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_bottom_up_nor@2x.png"; sourceTree = "<group>"; };
+		D411644D1D49FE47000EEA8A /* chat_bottom_voice_press@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_bottom_voice_press@2x.png"; sourceTree = "<group>"; };
+		D41164521D49FFCF000EEA8A /* chat_bottom_keyboard_nor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_bottom_keyboard_nor@2x.png"; sourceTree = "<group>"; };
+		D41164541D4A08F5000EEA8A /* chat_bottom_textfield@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_bottom_textfield@2x.png"; sourceTree = "<group>"; };
+		D41164561D4A0C96000EEA8A /* STextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STextField.h; sourceTree = "<group>"; };
+		D41164571D4A0C96000EEA8A /* STextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STextField.m; sourceTree = "<group>"; };
+		D41164591D4A1538000EEA8A /* toolbar_bottom_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolbar_bottom_bar@2x.png"; sourceTree = "<group>"; };
+		D41AA4471D4AFA510027B545 /* SChatToolBarInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SChatToolBarInputView.h; sourceTree = "<group>"; };
+		D41AA4481D4AFA510027B545 /* SChatToolBarInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SChatToolBarInputView.m; sourceTree = "<group>"; };
+		D41AA44B1D4AFEDC0027B545 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		D41AA44D1D4AFFB90027B545 /* UIResponder+Router.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIResponder+Router.h"; sourceTree = "<group>"; };
+		D41AA44E1D4AFFB90027B545 /* UIResponder+Router.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIResponder+Router.m"; sourceTree = "<group>"; };
+		D41AA4501D4B26090027B545 /* chat_input_pic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_input_pic@2x.png"; sourceTree = "<group>"; };
+		D4697F621D48809400138CB9 /* SChatUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SChatUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4697F661D48809400138CB9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D4697F681D48809400138CB9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		D4697F691D48809400138CB9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		D4697F6B1D48809400138CB9 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		D4697F6C1D48809400138CB9 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		D4697F6F1D48809400138CB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D4697F711D48809400138CB9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D4697F741D48809400138CB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D4697F761D48809400138CB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D4697F7F1D4880FF00138CB9 /* SChatVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SChatVC.h; sourceTree = "<group>"; };
+		D4697F801D4880FF00138CB9 /* SChatVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SChatVC.m; sourceTree = "<group>"; };
+		D4697F831D4884DC00138CB9 /* ChatBaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatBaseCell.h; sourceTree = "<group>"; };
+		D4697F841D4884DC00138CB9 /* ChatBaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatBaseCell.m; sourceTree = "<group>"; };
+		D4697F861D488CB000138CB9 /* cat.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cat.jpg; sourceTree = "<group>"; };
+		D4697F891D488E4700138CB9 /* ChatBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatBaseModel.h; sourceTree = "<group>"; };
+		D4697F8A1D488E4700138CB9 /* ChatBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatBaseModel.m; sourceTree = "<group>"; };
+		D4697F8C1D488F0B00138CB9 /* SChatHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SChatHeader.h; sourceTree = "<group>"; };
+		D4697F8F1D48971300138CB9 /* receive_bubble_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "receive_bubble_normal@2x.png"; sourceTree = "<group>"; };
+		D4697F901D48971300138CB9 /* send_bubber_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "send_bubber_normal@2x.png"; sourceTree = "<group>"; };
+		D4697F931D489BA000138CB9 /* ChatTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatTextCell.h; sourceTree = "<group>"; };
+		D4697F941D489BA000138CB9 /* ChatTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatTextCell.m; sourceTree = "<group>"; };
+		D4697F961D489CBA00138CB9 /* ChatTextModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatTextModel.h; sourceTree = "<group>"; };
+		D4697F971D489CBA00138CB9 /* ChatTextModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatTextModel.m; sourceTree = "<group>"; };
+		D4697F9B1D48AC4E00138CB9 /* ChatImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatImageCell.h; sourceTree = "<group>"; };
+		D4697F9C1D48AC4E00138CB9 /* ChatImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatImageCell.m; sourceTree = "<group>"; };
+		D4697F9E1D48AC6200138CB9 /* ChatImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatImageModel.h; sourceTree = "<group>"; };
+		D4697F9F1D48AC6200138CB9 /* ChatImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatImageModel.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D4697F5F1D48809400138CB9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E5C47A684A6373E43B19ED9A /* libPods-SChatUI.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		79B9A7270B02083C224CB387 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				52A4A2B6A7B0E3A2235C31A8 /* libPods-SChatUI.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		933E4FA3674F1C00323BEFD3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				71414EC83CE8515FED3DEB40 /* Pods-SChatUI.debug.xcconfig */,
+				89D9E0B201F233D3E15F1D2C /* Pods-SChatUI.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		D41164461D49F933000EEA8A /* ToolBar */ = {
+			isa = PBXGroup;
+			children = (
+				D41164471D49F95B000EEA8A /* SChatToolBar.h */,
+				D41164481D49F95B000EEA8A /* SChatToolBar.m */,
+				D41AA4471D4AFA510027B545 /* SChatToolBarInputView.h */,
+				D41AA4481D4AFA510027B545 /* SChatToolBarInputView.m */,
+				D41164561D4A0C96000EEA8A /* STextField.h */,
+				D41164571D4A0C96000EEA8A /* STextField.m */,
+			);
+			path = ToolBar;
+			sourceTree = "<group>";
+		};
+		D41AA44A1D4AFE700027B545 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				D41AA44C1D4AFFB90027B545 /* UIResponder */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		D41AA44C1D4AFFB90027B545 /* UIResponder */ = {
+			isa = PBXGroup;
+			children = (
+				D41AA44D1D4AFFB90027B545 /* UIResponder+Router.h */,
+				D41AA44E1D4AFFB90027B545 /* UIResponder+Router.m */,
+			);
+			path = UIResponder;
+			sourceTree = "<group>";
+		};
+		D4697F591D48809400138CB9 = {
+			isa = PBXGroup;
+			children = (
+				D4697F641D48809400138CB9 /* SChatUI */,
+				D4697F631D48809400138CB9 /* Products */,
+				933E4FA3674F1C00323BEFD3 /* Pods */,
+				79B9A7270B02083C224CB387 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		D4697F631D48809400138CB9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D4697F621D48809400138CB9 /* SChatUI.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D4697F641D48809400138CB9 /* SChatUI */ = {
+			isa = PBXGroup;
+			children = (
+				D4697F7C1D4880D900138CB9 /* Chat */,
+				D4697F681D48809400138CB9 /* AppDelegate.h */,
+				D4697F691D48809400138CB9 /* AppDelegate.m */,
+				D4697F6B1D48809400138CB9 /* ViewController.h */,
+				D4697F6C1D48809400138CB9 /* ViewController.m */,
+				D4697F6E1D48809400138CB9 /* Main.storyboard */,
+				D4697F711D48809400138CB9 /* Assets.xcassets */,
+				D4697F731D48809400138CB9 /* LaunchScreen.storyboard */,
+				D4697F761D48809400138CB9 /* Info.plist */,
+				D4697F651D48809400138CB9 /* Supporting Files */,
+			);
+			path = SChatUI;
+			sourceTree = "<group>";
+		};
+		D4697F651D48809400138CB9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D4697F661D48809400138CB9 /* main.m */,
+				D41AA44B1D4AFEDC0027B545 /* PrefixHeader.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D4697F7C1D4880D900138CB9 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				D4697F8C1D488F0B00138CB9 /* SChatHeader.h */,
+				D4697F821D4884B300138CB9 /* Resource */,
+				D41AA44A1D4AFE700027B545 /* Category */,
+				D41164461D49F933000EEA8A /* ToolBar */,
+				D4697F881D488E1000138CB9 /* Model */,
+				D4697F7D1D4880D900138CB9 /* Cell */,
+				D4697F7E1D4880D900138CB9 /* ViewController */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		D4697F7D1D4880D900138CB9 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				D4697F831D4884DC00138CB9 /* ChatBaseCell.h */,
+				D4697F841D4884DC00138CB9 /* ChatBaseCell.m */,
+				D4697F931D489BA000138CB9 /* ChatTextCell.h */,
+				D4697F941D489BA000138CB9 /* ChatTextCell.m */,
+				D4697F9B1D48AC4E00138CB9 /* ChatImageCell.h */,
+				D4697F9C1D48AC4E00138CB9 /* ChatImageCell.m */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		D4697F7E1D4880D900138CB9 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				D4697F7F1D4880FF00138CB9 /* SChatVC.h */,
+				D4697F801D4880FF00138CB9 /* SChatVC.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		D4697F821D4884B300138CB9 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				D41AA4501D4B26090027B545 /* chat_input_pic@2x.png */,
+				D41164591D4A1538000EEA8A /* toolbar_bottom_bar@2x.png */,
+				D41164541D4A08F5000EEA8A /* chat_bottom_textfield@2x.png */,
+				D41164521D49FFCF000EEA8A /* chat_bottom_keyboard_nor@2x.png */,
+				D411644A1D49FE47000EEA8A /* chat_bottom_up_nor@2x.png */,
+				D411644D1D49FE47000EEA8A /* chat_bottom_voice_press@2x.png */,
+				D4697F8F1D48971300138CB9 /* receive_bubble_normal@2x.png */,
+				D4697F901D48971300138CB9 /* send_bubber_normal@2x.png */,
+				D4697F861D488CB000138CB9 /* cat.jpg */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		D4697F881D488E1000138CB9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D4697F891D488E4700138CB9 /* ChatBaseModel.h */,
+				D4697F8A1D488E4700138CB9 /* ChatBaseModel.m */,
+				D4697F961D489CBA00138CB9 /* ChatTextModel.h */,
+				D4697F971D489CBA00138CB9 /* ChatTextModel.m */,
+				D4697F9E1D48AC6200138CB9 /* ChatImageModel.h */,
+				D4697F9F1D48AC6200138CB9 /* ChatImageModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D4697F611D48809400138CB9 /* SChatUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D4697F791D48809400138CB9 /* Build configuration list for PBXNativeTarget "SChatUI" */;
+			buildPhases = (
+				1C7342828B328454F524BD00 /* Check Pods Manifest.lock */,
+				D4697F5E1D48809400138CB9 /* Sources */,
+				D4697F5F1D48809400138CB9 /* Frameworks */,
+				D4697F601D48809400138CB9 /* Resources */,
+				3D2F822EF2BB310BC316A8EC /* Embed Pods Frameworks */,
+				BA3910E3E341FD1A3CED56DD /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SChatUI;
+			productName = SChatUI;
+			productReference = D4697F621D48809400138CB9 /* SChatUI.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D4697F5A1D48809400138CB9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = tongxuan;
+				TargetAttributes = {
+					D4697F611D48809400138CB9 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+				};
+			};
+			buildConfigurationList = D4697F5D1D48809400138CB9 /* Build configuration list for PBXProject "SChatUI" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D4697F591D48809400138CB9;
+			productRefGroup = D4697F631D48809400138CB9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D4697F611D48809400138CB9 /* SChatUI */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D4697F601D48809400138CB9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4697F751D48809400138CB9 /* LaunchScreen.storyboard in Resources */,
+				D4697F721D48809400138CB9 /* Assets.xcassets in Resources */,
+				D41164511D49FE47000EEA8A /* chat_bottom_voice_press@2x.png in Resources */,
+				D4697F871D488CB000138CB9 /* cat.jpg in Resources */,
+				D41AA4511D4B26090027B545 /* chat_input_pic@2x.png in Resources */,
+				D411645A1D4A1538000EEA8A /* toolbar_bottom_bar@2x.png in Resources */,
+				D4697F701D48809400138CB9 /* Main.storyboard in Resources */,
+				D41164551D4A08F5000EEA8A /* chat_bottom_textfield@2x.png in Resources */,
+				D41164531D49FFCF000EEA8A /* chat_bottom_keyboard_nor@2x.png in Resources */,
+				D4697F911D48971300138CB9 /* receive_bubble_normal@2x.png in Resources */,
+				D4697F921D48971300138CB9 /* send_bubber_normal@2x.png in Resources */,
+				D411644E1D49FE47000EEA8A /* chat_bottom_up_nor@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1C7342828B328454F524BD00 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		3D2F822EF2BB310BC316A8EC /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SChatUI/Pods-SChatUI-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BA3910E3E341FD1A3CED56DD /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SChatUI/Pods-SChatUI-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D4697F5E1D48809400138CB9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D4697F981D489CBA00138CB9 /* ChatTextModel.m in Sources */,
+				D4697FA01D48AC6200138CB9 /* ChatImageModel.m in Sources */,
+				D4697F851D4884DC00138CB9 /* ChatBaseCell.m in Sources */,
+				D4697F811D4880FF00138CB9 /* SChatVC.m in Sources */,
+				D4697F9D1D48AC4E00138CB9 /* ChatImageCell.m in Sources */,
+				D4697F6D1D48809400138CB9 /* ViewController.m in Sources */,
+				D4697F6A1D48809400138CB9 /* AppDelegate.m in Sources */,
+				D4697F951D489BA000138CB9 /* ChatTextCell.m in Sources */,
+				D4697F8B1D488E4700138CB9 /* ChatBaseModel.m in Sources */,
+				D41164491D49F95B000EEA8A /* SChatToolBar.m in Sources */,
+				D4697F671D48809400138CB9 /* main.m in Sources */,
+				D41AA44F1D4AFFB90027B545 /* UIResponder+Router.m in Sources */,
+				D41164581D4A0C96000EEA8A /* STextField.m in Sources */,
+				D41AA4491D4AFA510027B545 /* SChatToolBarInputView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		D4697F6E1D48809400138CB9 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D4697F6F1D48809400138CB9 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D4697F731D48809400138CB9 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D4697F741D48809400138CB9 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D4697F771D48809400138CB9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		D4697F781D48809400138CB9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D4697F7A1D48809400138CB9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 71414EC83CE8515FED3DEB40 /* Pods-SChatUI.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = SChatUI/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = tongxuan.SChatUI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		D4697F7B1D48809400138CB9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 89D9E0B201F233D3E15F1D2C /* Pods-SChatUI.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = SChatUI/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = tongxuan.SChatUI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D4697F5D1D48809400138CB9 /* Build configuration list for PBXProject "SChatUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4697F771D48809400138CB9 /* Debug */,
+				D4697F781D48809400138CB9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D4697F791D48809400138CB9 /* Build configuration list for PBXNativeTarget "SChatUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4697F7A1D48809400138CB9 /* Debug */,
+				D4697F7B1D48809400138CB9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D4697F5A1D48809400138CB9 /* Project object */;
+}
