@@ -66,6 +66,7 @@
     //  录音机 初始化
     self.recorder = [[AVAudioRecorder alloc]initWithURL:[NSURL fileURLWithPath:path] settings:@{AVNumberOfChannelsKey:@2,AVSampleRateKey:@44100,AVLinearPCMBitDepthKey:@32,AVEncoderAudioQualityKey:@(AVAudioQualityMax),AVEncoderBitRateKey:@128000} error:&error];
     [self.recorder prepareToRecord];
+    self.recorder.meteringEnabled = YES;
     self.recorder.delegate = self;
     [self.recorder record];
 
@@ -136,11 +137,6 @@
         return;
     }
     
-//    NSString * url = recorder.url.absoluteString;
-//    if ([url hasPrefix:@"file://"]) {
-//        url = [url substringFromIndex:[url rangeOfString:@"file://"].length];
-//    }
-    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"kInputViewDidFinishRecord" object:@{@"recordUrl":recorder.url.absoluteString?:@"",@"recordTime":[NSString stringWithFormat:@"%.1f",_timeRepeatNum/10.]}];
 }
 
@@ -156,10 +152,31 @@
         return;
     }
     [self.recorder updateMeters];//更新测量值
-    float power= [self.recorder averagePowerForChannel:1];//取得第一个通道的音频，注意音频强度范围时-160到0
-    CGFloat progress=(1.0/160.0)*(power+160.0);
-    NSLog(@"power  -- %f",power);
-    NSLog(@"recordProgress -- %f",progress);
+//    float power= [self.recorder averagePowerForChannel:0];//取得第一个通道的音频，注意音频强度范围时-160到0
+//    CGFloat progress=(1.0/160.0)*(power+160.0);
+    float   level;                // The linear 0.0 .. 1.0 value we need.
+    float   minDecibels = -80.0f; // Or use -60dB, which I measured in a silent room.
+    float   decibels = [self.recorder averagePowerForChannel:0];
+    if (decibels < minDecibels)
+    {
+        level = 0.0f;
+    }
+    else if (decibels >= 0.0f)
+    {
+        level = 1.0f;
+    }
+    else
+    {
+        float   root            = 2.0f;
+        float   minAmp          = powf(10.0f, 0.05f * minDecibels);
+        float   inverseAmpRange = 1.0f / (1.0f - minAmp);
+        float   amp             = powf(10.0f, 0.05f * decibels);
+        float   adjAmp          = (amp - minAmp) * inverseAmpRange;
+        
+        level = powf(adjAmp, 1.0f / root);
+    }
+    NSLog(@"power  -- %f",decibels);
+    NSLog(@"recordProgress -- %f",level);
 }
 
 

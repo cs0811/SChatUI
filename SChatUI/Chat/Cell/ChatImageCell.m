@@ -84,6 +84,8 @@
     CGFloat width = BubbleMaxWidth-LeftSpaceImg-RightSpaceImg-5;
     if (image.size.width<width) {
         width = image.size.width;
+    }else if (image.size.width==width && imageView.image) {
+        return;
     }
     CGFloat height = width*image.size.height/image.size.width;
     
@@ -103,7 +105,6 @@
     [imageView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(height).priority(300);
     }];
-
 }
 
 #pragma mark getter

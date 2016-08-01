@@ -23,7 +23,7 @@
 /**
  *  头像的宽高
  */
-#define AuthorImageWidth                30.
+#define AuthorImageWidth                40.
 /**
  *  头像到cell的间距(上/下)
  */
@@ -35,8 +35,11 @@
 /**
  *  气泡最大宽度
  */
-#define BubbleMaxWidth                  ScreenWidth-ScreenSpaceToAuthorImage-AuthorImageWidth-AuthorImageSpaceToBubble-50
-
+#define BubbleMaxWidth                  ScreenWidth-ScreenSpaceToAuthorImage-AuthorImageWidth-AuthorImageSpaceToBubble-80
+/**
+ *  警告图标宽高
+ */
+#define WarningViewW                    30.
 /*********************************************************/
 /**
  *  发送方默认头像

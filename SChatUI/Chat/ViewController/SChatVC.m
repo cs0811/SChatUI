@@ -213,6 +213,10 @@
     [_dataArr addObject:imgModel];
     [self.chatTable insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:_dataArr.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationRight];
     [self scrrollToEnd];
+    
+    // 模拟
+    [self performSelector:@selector(sendNetworkMessage:) withObject:@{@"start":@1,@"success":@0,@"failed":@0} afterDelay:0];
+    [self performSelector:@selector(sendNetworkMessage:) withObject:@{@"start":@0,@"success":@1,@"failed":@0} afterDelay:2];
 }
 
 /**
@@ -310,8 +314,14 @@
         [self scrrollToEnd];
         
     }
+    [self performSelector:@selector(sendNetworkMessage:) withObject:@{@"start":@1,@"success":@0,@"failed":@0} afterDelay:0];
+    [self performSelector:@selector(sendNetworkMessage:) withObject:@{@"start":@0,@"success":@1,@"failed":@0} afterDelay:2];
 }
 
+// 模拟联网发送消息
+- (void)sendNetworkMessage:(NSDictionary *)dic {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"kSendStatusDidChange" object:dic];
+}
 
 #pragma mark getter
 - (UITableView *)chatTable {

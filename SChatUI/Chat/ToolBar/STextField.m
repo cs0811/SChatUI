@@ -17,18 +17,18 @@
 }
 
 //控制placeHolder的位置，左右缩20
--(CGRect)placeholderRectForBounds:(CGRect)bounds
-{
-    //return CGRectInset(bounds, 20, 0);
-    CGRect inset = CGRectMake(bounds.origin.x+10, bounds.origin.y+7, bounds.size.width -20, bounds.size.height);//更好理解些
-    return inset;
-}
+//-(CGRect)placeholderRectForBounds:(CGRect)bounds
+//{
+//    //return CGRectInset(bounds, 20, 0);
+//    CGRect inset = CGRectMake(bounds.origin.x+10, bounds.origin.y+2.5, bounds.size.width -20, bounds.size.height-5);//更好理解些
+//    return inset;
+//}
 
 //控制显示文本的位置
 -(CGRect)textRectForBounds:(CGRect)bounds
 {
     //return CGRectInset(bounds, 50, 0);
-    CGRect inset = CGRectMake(bounds.origin.x+10, bounds.origin.y, bounds.size.width -20, bounds.size.height);//更好理解些
+    CGRect inset = CGRectMake(bounds.origin.x+15, bounds.origin.y, bounds.size.width -20, bounds.size.height);//更好理解些
     
     return inset;
     
@@ -36,7 +36,7 @@
 //控制编辑文本的位置
 -(CGRect)editingRectForBounds:(CGRect)bounds
 {
-    CGRect inset = CGRectMake(bounds.origin.x +10, bounds.origin.y, bounds.size.width -20, bounds.size.height);
+    CGRect inset = CGRectMake(bounds.origin.x +15, bounds.origin.y, bounds.size.width -20, bounds.size.height);
     return inset;
 }
 //控制左视图位置
@@ -47,9 +47,9 @@
 }
 
 //控制placeHolder的颜色、字体
-- (void)drawPlaceholderInRect:(CGRect)rect
-{
-    [[self placeholder] drawInRect:rect withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14],NSForegroundColorAttributeName:[UIColor lightGrayColor]}];
-}
+//- (void)drawPlaceholderInRect:(CGRect)rect
+//{
+//    [[self placeholder] drawInRect:rect withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[UIColor lightGrayColor]}];
+//}
 
 @end

@@ -15,12 +15,11 @@
  *  收到信息的头像
  */
 @property (nonatomic, strong) UIImageView * leftAuthorView;
-@property (nonatomic, strong) UIButton * leftWarningView;        // 发送失败警告
 /**
  *  发出信息的头像
  */
 @property (nonatomic, strong) UIImageView * rightAuthorView;
-@property (nonatomic, strong) UIButton * rightWarningView;       // 发送失败警告
+@property (nonatomic, strong) UIView * warningView;       // 发送失败警告
 @end
 
 @implementation ChatBaseCell
@@ -35,18 +34,16 @@
 
 #pragma mark loadUI
 - (void)loadUI {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendStatusDidChange:) name:@"kSendStatusDidChange" object:nil];
+    
     self.backgroundColor = [UIColor whiteColor];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     Wself
     [self addSubview:self.leftAuthorView];
     [self addSubview:self.leftBubbleView];
-    [self addSubview:self.leftWarningView];
+    [self addSubview:self.warningView];
     [self addSubview:self.rightAuthorView];
     [self addSubview:self.rightBubbleView];
-    [self addSubview:self.rightWarningView];
-    
-    self.leftWarningView.hidden = YES;
-    self.rightWarningView.hidden = YES;
     
     [self.leftAuthorView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(@CellSpaceToAuthorImage);
@@ -71,6 +68,11 @@
         make.width.lessThanOrEqualTo(@(BubbleMaxWidth));
         make.bottom.equalTo(wself).offset(-CellSpaceToAuthorImage);
     }];
+    [self.warningView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(wself.rightBubbleView.mas_left).offset(-0);
+        make.centerY.equalTo(wself.rightBubbleView);
+        make.width.height.mas_equalTo(WarningViewW);
+    }];
 }
 
 #pragma mark reloadUI
@@ -80,10 +82,36 @@
     self.leftBubbleView.hidden = bModel.isSender;
     self.rightAuthorView.hidden = !bModel.isSender;
     self.rightBubbleView.hidden = !bModel.isSender;
+    self.warningView.hidden = !bModel.isSender;
     
     // 加载头像
     [self.leftAuthorView sd_setImageWithURL:[NSURL URLWithString:bModel.sendAuthorImg] placeholderImage:[UIImage imageNamed:ReceiverPlaceHolderImg]];
     [self.rightAuthorView sd_setImageWithURL:[NSURL URLWithString:bModel.receiveAuthorImg] placeholderImage:[UIImage imageNamed:SenderPlaceHolderImg]];
+}
+
+#pragma mark action
+- (void)sendStatusDidChange:(NSNotification *)sender {
+    // @{@"start":@1,@"success":@0,@"failed":@0}
+    NSDictionary * dic = sender.object;
+    
+    if (dic[@"start"]) {
+        // 发送中
+        UIActivityIndicatorView * activity = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        [activity startAnimating];
+        activity.backgroundColor = [UIColor whiteColor];
+        [self.warningView addSubview:activity];
+    }else if (dic[@"success"]) {
+        // 成功
+        for (int i=0; i<self.warningView.subviews.count; i++) {
+            [self.warningView.subviews[i] removeFromSuperview];
+        }
+    }else if (dic[@"failed"]) {
+        // 失败
+        for (int i=0; i<self.warningView.subviews.count; i++) {
+            [self.warningView.subviews[i] removeFromSuperview];
+        }
+    }
+    
     
 }
 
@@ -110,12 +138,6 @@
     }
     return _leftBubbleView;
 }
-- (UIButton *)leftWarningView {
-    if (!_leftWarningView) {
-        _leftWarningView = [UIButton buttonWithType:UIButtonTypeCustom];
-    }
-    return _leftWarningView;
-}
 - (UIImageView *)rightAuthorView {
     if (!_rightAuthorView) {
         _rightAuthorView = [UIImageView new];
@@ -138,11 +160,15 @@
     }
     return _rightBubbleView;
 }
-- (UIButton *)rightWarningView {
-    if (!_rightWarningView) {
-        _rightWarningView = [UIButton buttonWithType:UIButtonTypeCustom];
+- (UIView *)warningView {
+    if (!_warningView) {
+        _warningView = [UIView new];
     }
-    return _rightWarningView;
+    return _warningView;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

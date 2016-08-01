@@ -56,6 +56,7 @@
     ChatTextModel * model = (ChatTextModel *)bModel;
     self.leftLabel.text = bModel.isSender?@"":model.receiveText;
     self.rightLabel.text = bModel.isSender?model.sendText:@"";
+    
 }
 
 #pragma mark getter

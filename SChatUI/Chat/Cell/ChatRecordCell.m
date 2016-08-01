@@ -21,6 +21,8 @@
 @property (nonatomic, strong) UIImageView * rightImg;
 @property (nonatomic, strong) UILabel * leftLabel;
 @property (nonatomic, strong) UILabel * rightLabel;
+@property (nonatomic,strong) SChatRecordHandle * recordHandle;
+
 @end
 
 @implementation ChatRecordCell
@@ -85,7 +87,7 @@
     CGFloat minW = RecordBuddleMinW;
     CGFloat buddleW = (maxW-minW)*model.timeLength/SChatRecordMaxTime;
     if (model.isSender) {
-        self.rightLabel.text = [NSString stringWithFormat:@"%.1f“",model.timeLength];
+        self.rightLabel.text = [NSString stringWithFormat:@"%.1f”",model.timeLength];
         self.leftLabel.text = @"";
         [self.rightBubbleView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.width.mas_equalTo(buddleW+minW);
@@ -97,14 +99,17 @@
             make.width.mas_equalTo(buddleW+minW);
         }];
     }
+    
 }
 
 #pragma mark action
 - (void)leftReplayRecord {
-    [[SChatRecordHandle new] repalyRecordWithUrl:_model.receiveUrl];
+    self.recordHandle = [SChatRecordHandle new];
+    [self.recordHandle repalyRecordWithUrl:_model.receiveUrl];
 }
 - (void)rightReplayRecord {
-    [[SChatRecordHandle new] repalyRecordWithUrl:_model.sendUrl];
+    self.recordHandle = [SChatRecordHandle new];
+    [self.recordHandle repalyRecordWithUrl:_model.sendUrl];
 }
 
 #pragma mark getter

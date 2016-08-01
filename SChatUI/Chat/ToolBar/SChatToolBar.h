@@ -19,7 +19,7 @@
 /**
  *  高度
  */
-#define ToolBarHeight                           40.
+#define ToolBarHeight                           50.
 /**
  *  内边距（上下）
  */
