@@ -39,9 +39,9 @@
         make.bottom.equalTo(wself.leftBubbleView).offset(-BottomSpaceImg);
     }];
     [self.rightImg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(wself.rightBubbleView).offset(LeftSpaceImg);
+        make.left.equalTo(wself.rightBubbleView).offset(RightSpaceImg);
         make.top.equalTo(wself.rightBubbleView).offset(TopSpaceImg);
-        make.right.equalTo(wself.rightBubbleView).offset(-RightSpaceImg-5);
+        make.right.equalTo(wself.rightBubbleView).offset(-LeftSpaceImg-5);
         make.bottom.equalTo(wself.rightBubbleView).offset(-BottomSpaceImg);
     }];
 }
@@ -70,7 +70,7 @@
 // 数据加工
 - (void)loadImg:(NSString *)img onView:(UIImageView *)imageView {
     Wself
-    if ([img hasPrefix:@"http"] && [img rangeOfString:@"/"].location != NSNotFound) {
+    if ([img hasPrefix:@"http"] || [img rangeOfString:@"/"].location != NSNotFound) {
         [imageView sd_setImageWithURL:[NSURL URLWithString:img] placeholderImage:nil options:SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             [wself resizeImage:image onView:imageView];
         }];

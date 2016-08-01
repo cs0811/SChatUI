@@ -8,11 +8,11 @@
 
 #import "ChatBaseCell.h"
 
-// 图片与bubble的边距
-#define TopSpaceImg             5.
-#define LeftSpaceImg            10.
-#define BottomSpaceImg          10.
-#define RightSpaceImg           10.
+// 图片与bubble的边距 (已接收方为参考,即左列)
+#define TopSpaceImg             10.
+#define LeftSpaceImg            15.
+#define BottomSpaceImg          15.
+#define RightSpaceImg           15.
 
 @interface ChatImageCell : ChatBaseCell
 

@@ -33,6 +33,12 @@
 		D4697F981D489CBA00138CB9 /* ChatTextModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D4697F971D489CBA00138CB9 /* ChatTextModel.m */; };
 		D4697F9D1D48AC4E00138CB9 /* ChatImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D4697F9C1D48AC4E00138CB9 /* ChatImageCell.m */; };
 		D4697FA01D48AC6200138CB9 /* ChatImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D4697F9F1D48AC6200138CB9 /* ChatImageModel.m */; };
+		D478CAD51D4F1A1700FE5112 /* SChatRecordHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = D478CAD41D4F1A1700FE5112 /* SChatRecordHandle.m */; };
+		D478CAD71D4F225F00FE5112 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D478CAD61D4F225F00FE5112 /* AVFoundation.framework */; };
+		D478CADA1D4F2ED900FE5112 /* ChatRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D478CAD91D4F2ED900FE5112 /* ChatRecordModel.m */; };
+		D478CADD1D4F30D300FE5112 /* ChatRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D478CADC1D4F30D300FE5112 /* ChatRecordCell.m */; };
+		D478CADF1D4F3F1400FE5112 /* chat_bottom_voice_pressR@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D478CADE1D4F3F1400FE5112 /* chat_bottom_voice_pressR@2x.png */; };
+		D478CAE71D4F6C3300FE5112 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D478CAE61D4F6C3300FE5112 /* AudioToolbox.framework */; };
 		E5C47A684A6373E43B19ED9A /* libPods-SChatUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A4A2B6A7B0E3A2235C31A8 /* libPods-SChatUI.a */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +89,15 @@
 		D4697F9C1D48AC4E00138CB9 /* ChatImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatImageCell.m; sourceTree = "<group>"; };
 		D4697F9E1D48AC6200138CB9 /* ChatImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatImageModel.h; sourceTree = "<group>"; };
 		D4697F9F1D48AC6200138CB9 /* ChatImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatImageModel.m; sourceTree = "<group>"; };
+		D478CAD31D4F1A1700FE5112 /* SChatRecordHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SChatRecordHandle.h; sourceTree = "<group>"; };
+		D478CAD41D4F1A1700FE5112 /* SChatRecordHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SChatRecordHandle.m; sourceTree = "<group>"; };
+		D478CAD61D4F225F00FE5112 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		D478CAD81D4F2ED900FE5112 /* ChatRecordModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatRecordModel.h; sourceTree = "<group>"; };
+		D478CAD91D4F2ED900FE5112 /* ChatRecordModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatRecordModel.m; sourceTree = "<group>"; };
+		D478CADB1D4F30D300FE5112 /* ChatRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatRecordCell.h; sourceTree = "<group>"; };
+		D478CADC1D4F30D300FE5112 /* ChatRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatRecordCell.m; sourceTree = "<group>"; };
+		D478CADE1D4F3F1400FE5112 /* chat_bottom_voice_pressR@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_bottom_voice_pressR@2x.png"; sourceTree = "<group>"; };
+		D478CAE61D4F6C3300FE5112 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +105,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D478CAE71D4F6C3300FE5112 /* AudioToolbox.framework in Frameworks */,
+				D478CAD71D4F225F00FE5112 /* AVFoundation.framework in Frameworks */,
 				E5C47A684A6373E43B19ED9A /* libPods-SChatUI.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -100,6 +117,8 @@
 		79B9A7270B02083C224CB387 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D478CAE61D4F6C3300FE5112 /* AudioToolbox.framework */,
+				D478CAD61D4F225F00FE5112 /* AVFoundation.framework */,
 				52A4A2B6A7B0E3A2235C31A8 /* libPods-SChatUI.a */,
 			);
 			name = Frameworks;
@@ -123,6 +142,8 @@
 				D41AA4481D4AFA510027B545 /* SChatToolBarInputView.m */,
 				D41164561D4A0C96000EEA8A /* STextField.h */,
 				D41164571D4A0C96000EEA8A /* STextField.m */,
+				D478CAD31D4F1A1700FE5112 /* SChatRecordHandle.h */,
+				D478CAD41D4F1A1700FE5112 /* SChatRecordHandle.m */,
 			);
 			path = ToolBar;
 			sourceTree = "<group>";
@@ -211,6 +232,8 @@
 				D4697F941D489BA000138CB9 /* ChatTextCell.m */,
 				D4697F9B1D48AC4E00138CB9 /* ChatImageCell.h */,
 				D4697F9C1D48AC4E00138CB9 /* ChatImageCell.m */,
+				D478CADB1D4F30D300FE5112 /* ChatRecordCell.h */,
+				D478CADC1D4F30D300FE5112 /* ChatRecordCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -227,6 +250,7 @@
 		D4697F821D4884B300138CB9 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				D478CADE1D4F3F1400FE5112 /* chat_bottom_voice_pressR@2x.png */,
 				D41AA4501D4B26090027B545 /* chat_input_pic@2x.png */,
 				D41164591D4A1538000EEA8A /* toolbar_bottom_bar@2x.png */,
 				D41164541D4A08F5000EEA8A /* chat_bottom_textfield@2x.png */,
@@ -249,6 +273,8 @@
 				D4697F971D489CBA00138CB9 /* ChatTextModel.m */,
 				D4697F9E1D48AC6200138CB9 /* ChatImageModel.h */,
 				D4697F9F1D48AC6200138CB9 /* ChatImageModel.m */,
+				D478CAD81D4F2ED900FE5112 /* ChatRecordModel.h */,
+				D478CAD91D4F2ED900FE5112 /* ChatRecordModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -324,6 +350,7 @@
 				D41164531D49FFCF000EEA8A /* chat_bottom_keyboard_nor@2x.png in Resources */,
 				D4697F911D48971300138CB9 /* receive_bubble_normal@2x.png in Resources */,
 				D4697F921D48971300138CB9 /* send_bubber_normal@2x.png in Resources */,
+				D478CADF1D4F3F1400FE5112 /* chat_bottom_voice_pressR@2x.png in Resources */,
 				D411644E1D49FE47000EEA8A /* chat_bottom_up_nor@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -390,10 +417,13 @@
 				D4697F9D1D48AC4E00138CB9 /* ChatImageCell.m in Sources */,
 				D4697F6D1D48809400138CB9 /* ViewController.m in Sources */,
 				D4697F6A1D48809400138CB9 /* AppDelegate.m in Sources */,
+				D478CADD1D4F30D300FE5112 /* ChatRecordCell.m in Sources */,
 				D4697F951D489BA000138CB9 /* ChatTextCell.m in Sources */,
 				D4697F8B1D488E4700138CB9 /* ChatBaseModel.m in Sources */,
+				D478CAD51D4F1A1700FE5112 /* SChatRecordHandle.m in Sources */,
 				D41164491D49F95B000EEA8A /* SChatToolBar.m in Sources */,
 				D4697F671D48809400138CB9 /* main.m in Sources */,
+				D478CADA1D4F2ED900FE5112 /* ChatRecordModel.m in Sources */,
 				D41AA44F1D4AFFB90027B545 /* UIResponder+Router.m in Sources */,
 				D41164581D4A0C96000EEA8A /* STextField.m in Sources */,
 				D41AA4491D4AFA510027B545 /* SChatToolBarInputView.m in Sources */,
@@ -509,11 +539,13 @@
 			baseConfigurationReference = 71414EC83CE8515FED3DEB40 /* Pods-SChatUI.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: 元智 项 (WTU8BKH68A)";
 				INFOPLIST_FILE = SChatUI/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tongxuan.SChatUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "032e2d3a-ee02-40ce-bb70-1af59d58da0e";
 			};
 			name = Debug;
 		};
@@ -522,11 +554,13 @@
 			baseConfigurationReference = 89D9E0B201F233D3E15F1D2C /* Pods-SChatUI.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: 元智 项 (WTU8BKH68A)";
 				INFOPLIST_FILE = SChatUI/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = tongxuan.SChatUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "032e2d3a-ee02-40ce-bb70-1af59d58da0e";
 			};
 			name = Release;
 		};

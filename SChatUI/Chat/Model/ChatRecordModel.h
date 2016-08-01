@@ -10,4 +10,12 @@
 
 @interface ChatRecordModel : ChatBaseModel
 
+@property (nonatomic, copy) NSString * sendUrl;
+@property (nonatomic, copy) NSString * receiveUrl;
+
+/**
+ *  语音时长
+ */
+@property (nonatomic, assign) float timeLength;
+
 @end

@@ -9,18 +9,27 @@
 #import "SChatToolBar.h"
 #import "SChatToolBarInputView.h"
 #import "STextField.h"
+#import "UIResponder+Router.h"
+#import "SChatRecordHandle.h"
 #import "Masonry.h"
+
 
 #define Wself                           __weak typeof(self) wself = self;
 #define Sself                           __strong typeof(wself) sself = wself;
 #define ScreenWidth                     [UIScreen mainScreen].bounds.size.width
 #define ScreenHeight                    [UIScreen mainScreen].bounds.size.height
 
-@interface SChatToolBar ()
+@interface SChatToolBar ()<UITextFieldDelegate>
 @property (nonatomic,strong) UIButton * leftBtn;
 @property (nonatomic,strong) STextField * inputTF;
 @property (nonatomic,strong) UIButton * rightBtn;
 @property (nonatomic,strong) SChatToolBarInputView * chatInputView;
+
+/**
+ *  放置在输入框上的按钮(录音时候放置)
+ */
+@property (nonatomic,strong) UIButton * recordBtn;
+@property (nonatomic,strong) SChatRecordHandle * recordHandle;
 @end
 
 @implementation SChatToolBar
@@ -38,6 +47,7 @@
     Wself
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(inputViewItemDidChoose) name:@"kInputViewItemDidChoose" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(inputViewDidFinishRecord:) name:@"kInputViewDidFinishRecord" object:nil];
     
     self.userInteractionEnabled = YES;
     self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:ToolBarBGColorImg]];
@@ -61,6 +71,16 @@
     }];
 }
 
+#pragma mark UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField.text && textField.text.length>0) {
+        [self routerEventWithName:@"SChatToolBarSendTextEvent" userInfo:@{@"text":textField.text}];
+        [textField resignFirstResponder];
+        textField.text = @"";
+    }
+    return YES;
+}
+
 #pragma mark action
 // 右边按钮事件
 - (void)rightBtnClick:(UIButton *)sender {
@@ -74,15 +94,57 @@
     [self.inputTF becomeFirstResponder];
 }
 
+// 左边按钮事件 (录音)
 - (void)leftBtnClick:(UIButton *)sender {
     sender.selected = !sender.selected;
 
+    if (sender.selected) {
+        self.recordBtn.frame = self.inputTF.frame;
+        [self addSubview:self.recordBtn];
+    }else {
+        [self.recordBtn removeFromSuperview];
+    }
 }
 
 - (void)inputViewItemDidChoose {
     [self.inputTF resignFirstResponder];
 }
 
+/**
+ *  完成录音
+ */
+- (void)inputViewDidFinishRecord:(NSNotification *)sender {
+    [self leftBtnClick:self.leftBtn];
+    [self routerEventWithName:@"SChatToolBarRecordDidFinishEvent" userInfo:sender.object];
+}
+
+/**
+ *  取消录音
+ */
+- (void)cancelRecord:(UIButton *)sender {
+    [_recordBtn setTitle:@"按住说话" forState:UIControlStateNormal];
+    [_recordBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+
+    [self.recordHandle cancelRecord];
+}
+
+/**
+ *  开始录音
+ */
+- (void)startRecord:(UIButton *)sender {
+    [_recordBtn setTitle:@"向上滑动，取消录音" forState:UIControlStateNormal];
+    [_recordBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+
+    self.recordHandle = [SChatRecordHandle new];
+    [self.recordHandle startRecord];
+}
+
+- (void)stopRecord:(UIButton *)sender {
+    [_recordBtn setTitle:@"按住说话" forState:UIControlStateNormal];
+    [_recordBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    
+    [self.recordHandle stopRecord];
+}
 
 #pragma mark getter
 - (UIButton *)leftBtn {
@@ -92,7 +154,7 @@
         [_leftBtn setImage:[UIImage imageNamed:ToolBarLeftBtnHLightImg] forState:UIControlStateHighlighted];
         [_leftBtn setImage:[UIImage imageNamed:TollBarLeftBtnSelImg] forState:UIControlStateSelected];
         _leftBtn.selected = NO;
-        [_rightBtn addTarget:self action:@selector(leftBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_leftBtn addTarget:self action:@selector(leftBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _leftBtn;
 }
@@ -119,6 +181,8 @@
         UIImage * tempImage = [UIImage imageNamed:ToolBarInputViewBGImg];
         tempImage = [tempImage resizableImageWithCapInsets:UIEdgeInsetsMake(40, 10, 10, 40) resizingMode:UIImageResizingModeStretch];
         _inputTF.background = tempImage;
+        _inputTF.returnKeyType = UIReturnKeySend;
+        _inputTF.delegate = self;
 
     }
     return _inputTF;
@@ -132,6 +196,21 @@
         _chatInputView.allItems = @[item];
     }
     return _chatInputView;
+}
+- (UIButton *)recordBtn {
+    if (!_recordBtn) {
+        _recordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _recordBtn.backgroundColor = [UIColor whiteColor];
+        [_recordBtn setTitle:@"按住说话" forState:UIControlStateNormal];
+        [_recordBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+        _recordBtn.titleLabel.font = [UIFont systemFontOfSize:15.];
+        _recordBtn.layer.cornerRadius = 5;
+        
+        [_recordBtn addTarget:self action:@selector(cancelRecord:) forControlEvents:UIControlEventTouchUpOutside];
+        [_recordBtn addTarget:self action:@selector(startRecord:) forControlEvents:UIControlEventTouchDown];
+        [_recordBtn addTarget:self action:@selector(stopRecord:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _recordBtn;
 }
 
 

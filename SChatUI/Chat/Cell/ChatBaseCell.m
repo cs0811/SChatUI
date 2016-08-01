@@ -103,6 +103,7 @@
 - (UIImageView *)leftBubbleView {
     if (!_leftBubbleView) {
         _leftBubbleView = [UIImageView new];
+        _leftBubbleView.userInteractionEnabled = YES;
         UIImage * tempImage = [UIImage imageNamed:ReceiverBubbleImg];
         tempImage = [tempImage resizableImageWithCapInsets:UIEdgeInsetsMake(30, 30, 10, 20) resizingMode:UIImageResizingModeStretch];
         _leftBubbleView.image = tempImage;
@@ -130,6 +131,7 @@
 - (UIImageView *)rightBubbleView {
     if (!_rightBubbleView) {
         _rightBubbleView = [UIImageView new];
+        _rightBubbleView.userInteractionEnabled = YES;
         UIImage * tempImage = [UIImage imageNamed:SenderBubbleImg];
         tempImage = [tempImage resizableImageWithCapInsets:UIEdgeInsetsMake(30, 20, 10, 30) resizingMode:UIImageResizingModeStretch];
         _rightBubbleView.image = tempImage;

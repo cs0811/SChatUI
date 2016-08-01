@@ -14,6 +14,10 @@
 #import "ChatTextModel.h"
 #import "ChatImageCell.h"
 #import "ChatImageModel.h"
+#import "ChatRecordModel.h"
+#import "ChatRecordCell.h"
+
+
 #import "UIResponder+Router.h"
 #import<AssetsLibrary/AssetsLibrary.h>
 #import<AVFoundation/AVCaptureDevice.h>
@@ -24,6 +28,7 @@
 @interface SChatVC ()<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
     NSMutableArray * _dataArr;
+    NSTimeInterval _systemAnimationTime;        // 系统动画时间
 }
 @property (nonatomic, strong) UITableView * chatTable;
 @property (nonatomic, strong) SChatToolBar * chatToolBar;
@@ -70,7 +75,12 @@
     textModel.isSender = 1;
     textModel.sendText = @"测试-测试-测试-测试-测试=测试测试=测试=测试\nsdfqrsdff\n测试测试测试测试测试-测试测试测试测试\n测试1111111";
     
-    NSArray * data = @[imgModel,textModel,textModel,imgModel,imgModel,textModel];
+    ChatRecordModel * recordModel = [ChatRecordModel new];
+    recordModel.isSender = 1;
+    recordModel.sendUrl = @"";
+    recordModel.timeLength = 18.1;
+    
+    NSArray * data = @[imgModel,textModel,textModel,imgModel,imgModel,textModel,recordModel];
     _dataArr = [NSMutableArray arrayWithArray:data];
     [self.chatTable reloadData];
     [self scrrollToEnd];
@@ -95,6 +105,11 @@
         [cell reloadUIWithData:_dataArr[indexPath.row]];
         return cell;
 
+    }else if ([model isKindOfClass:[ChatRecordModel class]]){
+        ChatRecordCell * cell = [tableView dequeueReusableCellWithIdentifier:@"ChatRecordCell"];
+        [cell reloadUIWithData:_dataArr[indexPath.row]];
+        return cell;
+        
     }
     return nil;
 }
@@ -111,6 +126,12 @@
         
     }else if ([model isKindOfClass:[ChatImageModel class]]){
         ChatImageCell * cell = [tableView dequeueReusableCellWithIdentifier:@"ChatImageCell"];
+        [cell reloadUIWithData:_dataArr[indexPath.row]];
+        return [cell systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        
+    }
+    else if ([model isKindOfClass:[ChatRecordModel class]]){
+        ChatRecordCell * cell = [tableView dequeueReusableCellWithIdentifier:@"ChatRecordCell"];
         [cell reloadUIWithData:_dataArr[indexPath.row]];
         return [cell systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
         
@@ -190,7 +211,7 @@
     imgModel.sendLocalImg = image;
     imgModel.isSender = 1;
     [_dataArr addObject:imgModel];
-    [self.chatTable insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:_dataArr.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.chatTable insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:_dataArr.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationRight];
     [self scrrollToEnd];
 }
 
@@ -198,7 +219,14 @@
  *  滚动到底部
  */
 - (void)scrrollToEnd {
-    [self.chatTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_dataArr.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+    Wself
+    // 等待insertRow操作完成之后再滚动到底部
+    [UIView animateWithDuration:_systemAnimationTime animations:^{
+        
+    } completion:^(BOOL finished) {
+        Sself
+        [wself.chatTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:sself->_dataArr.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+    }];
 }
 
 #pragma mark action
@@ -215,6 +243,7 @@
      UIKeyboardFrameEndUserInfoKey = "NSRect: {{0, 667}, {375, 216}}";
      UIKeyboardIsLocalUserInfoKey = 1;
      */
+    _systemAnimationTime = [dic[UIKeyboardAnimationDurationUserInfoKey] floatValue]?:0.25;
     CGRect keyboardRect = [dic[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
     CGFloat keyboardH = keyboardRect.size.height;
     
@@ -222,7 +251,7 @@
 
     [UIView animateWithDuration:[dic[UIKeyboardAnimationDurationUserInfoKey] floatValue] animations:^{
         wself.chatToolBar.frame = chatBarNewFrame;
-        wself.chatTable.contentInset = UIEdgeInsetsMake(-self.chatTable.contentSize.height+chatBarNewFrame.origin.y, 0, 0, 0);
+        wself.chatTable.contentInset = UIEdgeInsetsMake(-wself.chatTable.contentSize.height+chatBarNewFrame.origin.y, 0, 0, 0);
     } completion:^(BOOL finished) {
         
     }];
@@ -243,8 +272,8 @@
 
 // 传递事件
 - (void)routerEventWithName:(NSString *)eventName userInfo:(NSDictionary *)userInfo {
-    // 点击‘+’之后，弹出选择视图的触发事件
     if ([eventName isEqualToString:@"SChatToolBarInputViewItemEvent"]) {
+        // 点击‘+’之后，弹出选择视图的触发事件
         NSInteger index = [userInfo[@"itemIndex"] floatValue];
         if (index == 0) {
             // 发送图片
@@ -257,6 +286,29 @@
             actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
             [actionSheet showInView:self.view];
         }
+    }else if ([eventName isEqualToString:@"SChatToolBarSendTextEvent"]) {
+        // 发送文字
+        NSString * text = userInfo[@"text"];
+        ChatTextModel * textModel = [ChatTextModel new];
+        textModel.sendText = text;
+        textModel.isSender = 1;
+        [_dataArr addObject:textModel];
+        [self.chatTable insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:_dataArr.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationRight];
+        [self scrrollToEnd];
+        
+    }else if ([eventName isEqualToString:@"SChatToolBarRecordDidFinishEvent"]) {
+        // 发送语音
+        NSString * url = userInfo[@"recordUrl"];
+        NSNumber * time = userInfo[@"recordTime"];
+        
+        ChatRecordModel * recordModel = [ChatRecordModel new];
+        recordModel.sendUrl = url;
+        recordModel.timeLength = time.floatValue;
+        recordModel.isSender = 1;
+        [_dataArr addObject:recordModel];
+        [self.chatTable insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:_dataArr.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationRight];
+        [self scrrollToEnd];
+        
     }
 }
 
@@ -274,6 +326,7 @@
         [_chatTable registerClass:[ChatBaseCell class] forCellReuseIdentifier:@"ChatBaseCell"];
         [_chatTable registerClass:[ChatTextCell class] forCellReuseIdentifier:@"ChatTextCell"];
         [_chatTable registerClass:[ChatImageCell class] forCellReuseIdentifier:@"ChatImageCell"];
+        [_chatTable registerClass:[ChatRecordCell class] forCellReuseIdentifier:@"ChatRecordCell"];
     }
     return _chatTable;
 }

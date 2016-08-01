@@ -10,8 +10,16 @@
 
 @interface ChatImageModel : ChatBaseModel
 
+/**
+ *  接收到网络的图
+ */
 @property (nonatomic, copy) NSString * sendImg;
-@property (nonatomic, strong) UIImage * sendLocalImg;
 @property (nonatomic, copy) NSString * receiveImg;
+
+/**
+ *  本地读取图库发送的图
+ */
+@property (nonatomic, strong) UIImage * sendLocalImg;
+
 
 @end

@@ -39,9 +39,9 @@
         make.bottom.equalTo(wself.leftBubbleView).offset(-BottomSpaceText);
     }];
     [self.rightLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(wself.rightBubbleView).offset(LeftSpaceText);
+        make.left.equalTo(wself.rightBubbleView).offset(RightSpaceText);
         make.top.equalTo(wself.rightBubbleView).offset(TopSpaceText);
-        make.right.equalTo(wself.rightBubbleView).offset(-RightSpaceText);
+        make.right.equalTo(wself.rightBubbleView).offset(-LeftSpaceText);
         make.bottom.equalTo(wself.rightBubbleView).offset(-BottomSpaceText);
     }];
 }
