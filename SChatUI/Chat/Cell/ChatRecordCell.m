@@ -9,6 +9,7 @@
 #import "ChatRecordCell.h"
 #import "ChatRecordModel.h"
 #import "SChatRecordHandle.h"
+#import "UIResponder+Router.h"
 
 
 @interface ChatRecordCell ()
@@ -104,18 +105,30 @@
 
 #pragma mark action
 - (void)leftReplayRecord {
+    // 关闭其他正在播放的语音
+    [self routerEventWithName:@"SChatStopReplayRecordEvent" userInfo:nil];
+
     self.recordHandle = [SChatRecordHandle new];
-    [self.recordHandle repalyRecordWithUrl:_model.receiveUrl];
+    [self.recordHandle replayRecordWithUrl:_model.receiveUrl];
     
     // 播放动画
     [self replayVoiceWithImgStr:@"chat_receive_voice_" onImageView:self.leftImg];
 }
 - (void)rightReplayRecord {
+    // 关闭其他正在播放的语音
+    [self routerEventWithName:@"SChatStopReplayRecordEvent" userInfo:nil];
+
     self.recordHandle = [SChatRecordHandle new];
-    [self.recordHandle repalyRecordWithUrl:_model.sendUrl];
+    [self.recordHandle replayRecordWithUrl:_model.sendUrl];
     
     // 播放动画
     [self replayVoiceWithImgStr:@"chat_send_voice_" onImageView:self.rightImg];
+}
+// 关闭正在播放的语音
+- (void)stopReplayRecord {
+    [self.leftImg stopAnimating];
+    [self.rightImg stopAnimating];
+    [self.recordHandle stopReplayRecord];
 }
 
 - (void)replayVoiceWithImgStr:(NSString *)str onImageView:(UIImageView *)imageView {

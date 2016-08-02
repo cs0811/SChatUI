@@ -26,4 +26,9 @@
 
 @interface ChatRecordCell : ChatBaseCell
 
+/**
+ *  停止播放语音 (当播放另一条语音时，关闭其他语音)
+ */
+- (void)stopReplayRecord;
+
 @end

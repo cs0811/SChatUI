@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		17D9D0BD1D50C3F50082BA8A /* SChatRecordDecibelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17D9D0BC1D50C3F50082BA8A /* SChatRecordDecibelView.m */; };
 		D41164491D49F95B000EEA8A /* SChatToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D41164481D49F95B000EEA8A /* SChatToolBar.m */; };
 		D41164581D4A0C96000EEA8A /* STextField.m in Sources */ = {isa = PBXBuildFile; fileRef = D41164571D4A0C96000EEA8A /* STextField.m */; };
 		D41AA4491D4AFA510027B545 /* SChatToolBarInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = D41AA4481D4AFA510027B545 /* SChatToolBarInputView.m */; };
@@ -59,6 +60,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		17D9D0BB1D50C3F50082BA8A /* SChatRecordDecibelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SChatRecordDecibelView.h; sourceTree = "<group>"; };
+		17D9D0BC1D50C3F50082BA8A /* SChatRecordDecibelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SChatRecordDecibelView.m; sourceTree = "<group>"; };
 		52A4A2B6A7B0E3A2235C31A8 /* libPods-SChatUI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SChatUI.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		71414EC83CE8515FED3DEB40 /* Pods-SChatUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SChatUI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SChatUI/Pods-SChatUI.debug.xcconfig"; sourceTree = "<group>"; };
 		89D9E0B201F233D3E15F1D2C /* Pods-SChatUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SChatUI.release.xcconfig"; path = "Pods/Target Support Files/Pods-SChatUI/Pods-SChatUI.release.xcconfig"; sourceTree = "<group>"; };
@@ -176,6 +179,8 @@
 				D41164571D4A0C96000EEA8A /* STextField.m */,
 				D478CAD31D4F1A1700FE5112 /* SChatRecordHandle.h */,
 				D478CAD41D4F1A1700FE5112 /* SChatRecordHandle.m */,
+				17D9D0BB1D50C3F50082BA8A /* SChatRecordDecibelView.h */,
+				17D9D0BC1D50C3F50082BA8A /* SChatRecordDecibelView.m */,
 			);
 			path = ToolBar;
 			sourceTree = "<group>";
@@ -480,6 +485,7 @@
 				D4697F811D4880FF00138CB9 /* SChatVC.m in Sources */,
 				D4697F9D1D48AC4E00138CB9 /* ChatImageCell.m in Sources */,
 				D4697F6D1D48809400138CB9 /* ViewController.m in Sources */,
+				17D9D0BD1D50C3F50082BA8A /* SChatRecordDecibelView.m in Sources */,
 				D4697F6A1D48809400138CB9 /* AppDelegate.m in Sources */,
 				D478CADD1D4F30D300FE5112 /* ChatRecordCell.m in Sources */,
 				D4697F951D489BA000138CB9 /* ChatTextCell.m in Sources */,

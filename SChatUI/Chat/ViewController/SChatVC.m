@@ -342,8 +342,15 @@
         [self performSelector:@selector(sendNetworkMessage:) withObject:@{@"start":@1,@"success":@0,@"failed":@0,@"data":userInfo[@"data"],@"dataClass":userInfo[@"dataClass"]} afterDelay:0];
         [self performSelector:@selector(sendNetworkMessage:) withObject:@{@"start":@0,@"success":@1,@"failed":@0,@"data":userInfo[@"data"],@"dataClass":userInfo[@"dataClass"]} afterDelay:2];
         
+    }else if ([eventName isEqualToString:@"SChatStopReplayRecordEvent"]) {
+        // 关闭所有语音播放
+        for (int i=0; i<_dataArr.count; i++) {
+            id cell = [self.chatTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+            if ([cell isKindOfClass:[ChatRecordCell class]]) {
+                [(ChatRecordCell *)cell stopReplayRecord];
+            }
+        }
     }
-    
 }
 
 // 模拟联网发送消息

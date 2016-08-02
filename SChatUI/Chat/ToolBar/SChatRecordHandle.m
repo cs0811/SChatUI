@@ -7,8 +7,11 @@
 //
 
 #import "SChatRecordHandle.h"
+#import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
+#import "SChatRecordDecibelView.h"
+
 
 #define Wself                           __weak typeof(self) wself = self;
 #define Sself                           __strong typeof(wself) sself = wself;
@@ -22,6 +25,7 @@
 @property (nonatomic, strong) AVAudioRecorder * recorder;
 @property (nonatomic, strong) AVAudioPlayer * player;
 @property (nonatomic, strong) NSTimer * timer;
+@property (nonatomic, strong) SChatRecordDecibelView * decibelView;
 @end
 
 @implementation SChatRecordHandle
@@ -57,6 +61,7 @@
     _timeRepeatNum = 0;
     _isCanceled = NO;
     self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(audioPowerChange) userInfo:nil repeats:YES];
+    self.decibelView = [SChatRecordDecibelView new];
     
     //  URL是本地的URL AVAudioRecorder需要一个存储的路径
     NSString *name = [NSString stringWithFormat:@"%d.wav",(int)[NSDate date].timeIntervalSince1970];
@@ -91,6 +96,7 @@
 - (void)stopRecord {
     if ([self.recorder isRecording] && _allowRecord) {
         [self.recorder stop];
+        [self.decibelView end];
         [self.timer invalidate];
         self.timer = nil;
     }
@@ -108,7 +114,7 @@
 /**
  *  播放录音
  */
-- (void)repalyRecordWithUrl:(NSString *)url {
+- (void)replayRecordWithUrl:(NSString *)url {
     NSError *error = nil;
     if (!url || url.length==0 || [url isEqual:@"<null>"]) {
         NSLog(@"语音播放地址出错");
@@ -128,6 +134,12 @@
         [self.player prepareToPlay];
         [self.player setVolume:1];
         [self.player play];
+    }
+}
+
+- (void)stopReplayRecord {
+    if ([self.player isPlaying]) {
+        [self.player stop];
     }
 }
 
@@ -175,8 +187,7 @@
         
         level = powf(adjAmp, 1.0f / root);
     }
-    NSLog(@"power  -- %f",decibels);
-    NSLog(@"recordProgress -- %f",level);
+    [self.decibelView updateDecibelImgWithProgress:level];
 }
 
 

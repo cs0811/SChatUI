@@ -26,6 +26,7 @@
 /**
  *  播放录音
  */
-- (void)repalyRecordWithUrl:(NSString *)url;
+- (void)replayRecordWithUrl:(NSString *)url;
+- (void)stopReplayRecord;
 
 @end
