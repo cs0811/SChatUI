@@ -13,10 +13,12 @@
 #import "SChatToolBar.h"
 #import "ChatBaseCell.h"
 #import "ChatBaseModel.h"
-//#import "ChatTextCell.h"
-//#import "ChatTextModel.h"
-//#import "ChatImageCell.h"
-//#import "ChatImageModel.h"
+#import "ChatTextCell.h"
+#import "ChatTextModel.h"
+#import "ChatImageCell.h"
+#import "ChatImageModel.h"
+#import "ChatRecordModel.h"
+#import "ChatRecordCell.h"
 
 
 #endif /* SChatHeader_h */
