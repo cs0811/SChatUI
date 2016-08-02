@@ -45,6 +45,16 @@
 		D4BEBA951D507C4700CCC36D /* chat_send_voice_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4BEBA8F1D507C4700CCC36D /* chat_send_voice_2@2x.png */; };
 		D4BEBA961D507C4700CCC36D /* chat_send_voice_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4BEBA901D507C4700CCC36D /* chat_send_voice_3@2x.png */; };
 		D4BEBA981D50830900CCC36D /* chat_send_failed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4BEBA971D50830900CCC36D /* chat_send_failed@2x.png */; };
+		D4BEBAA31D50AB3300CCC36D /* chat_decibel_0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4BEBA991D50AB3300CCC36D /* chat_decibel_0@2x.png */; };
+		D4BEBAA41D50AB3300CCC36D /* chat_decibel_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4BEBA9A1D50AB3300CCC36D /* chat_decibel_1@2x.png */; };
+		D4BEBAA51D50AB3300CCC36D /* chat_decibel_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4BEBA9B1D50AB3300CCC36D /* chat_decibel_2@2x.png */; };
+		D4BEBAA61D50AB3300CCC36D /* chat_decibel_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4BEBA9C1D50AB3300CCC36D /* chat_decibel_3@2x.png */; };
+		D4BEBAA71D50AB3300CCC36D /* chat_decibel_4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4BEBA9D1D50AB3300CCC36D /* chat_decibel_4@2x.png */; };
+		D4BEBAA81D50AB3300CCC36D /* chat_decibel_5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4BEBA9E1D50AB3300CCC36D /* chat_decibel_5@2x.png */; };
+		D4BEBAA91D50AB3300CCC36D /* chat_decibel_6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4BEBA9F1D50AB3300CCC36D /* chat_decibel_6@2x.png */; };
+		D4BEBAAA1D50AB3300CCC36D /* chat_decibel_7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4BEBAA01D50AB3300CCC36D /* chat_decibel_7@2x.png */; };
+		D4BEBAAB1D50AB3300CCC36D /* chat_decibel_8@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4BEBAA11D50AB3300CCC36D /* chat_decibel_8@2x.png */; };
+		D4BEBAAC1D50AB3300CCC36D /* chat_decibel_9@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4BEBAA21D50AB3300CCC36D /* chat_decibel_9@2x.png */; };
 		E5C47A684A6373E43B19ED9A /* libPods-SChatUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 52A4A2B6A7B0E3A2235C31A8 /* libPods-SChatUI.a */; };
 /* End PBXBuildFile section */
 
@@ -110,6 +120,16 @@
 		D4BEBA8F1D507C4700CCC36D /* chat_send_voice_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_send_voice_2@2x.png"; sourceTree = "<group>"; };
 		D4BEBA901D507C4700CCC36D /* chat_send_voice_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_send_voice_3@2x.png"; sourceTree = "<group>"; };
 		D4BEBA971D50830900CCC36D /* chat_send_failed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_send_failed@2x.png"; sourceTree = "<group>"; };
+		D4BEBA991D50AB3300CCC36D /* chat_decibel_0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_decibel_0@2x.png"; sourceTree = "<group>"; };
+		D4BEBA9A1D50AB3300CCC36D /* chat_decibel_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_decibel_1@2x.png"; sourceTree = "<group>"; };
+		D4BEBA9B1D50AB3300CCC36D /* chat_decibel_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_decibel_2@2x.png"; sourceTree = "<group>"; };
+		D4BEBA9C1D50AB3300CCC36D /* chat_decibel_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_decibel_3@2x.png"; sourceTree = "<group>"; };
+		D4BEBA9D1D50AB3300CCC36D /* chat_decibel_4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_decibel_4@2x.png"; sourceTree = "<group>"; };
+		D4BEBA9E1D50AB3300CCC36D /* chat_decibel_5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_decibel_5@2x.png"; sourceTree = "<group>"; };
+		D4BEBA9F1D50AB3300CCC36D /* chat_decibel_6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_decibel_6@2x.png"; sourceTree = "<group>"; };
+		D4BEBAA01D50AB3300CCC36D /* chat_decibel_7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_decibel_7@2x.png"; sourceTree = "<group>"; };
+		D4BEBAA11D50AB3300CCC36D /* chat_decibel_8@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_decibel_8@2x.png"; sourceTree = "<group>"; };
+		D4BEBAA21D50AB3300CCC36D /* chat_decibel_9@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "chat_decibel_9@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -277,6 +297,16 @@
 		D4BEBA6A1D507BC400CCC36D /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				D4BEBA991D50AB3300CCC36D /* chat_decibel_0@2x.png */,
+				D4BEBA9A1D50AB3300CCC36D /* chat_decibel_1@2x.png */,
+				D4BEBA9B1D50AB3300CCC36D /* chat_decibel_2@2x.png */,
+				D4BEBA9C1D50AB3300CCC36D /* chat_decibel_3@2x.png */,
+				D4BEBA9D1D50AB3300CCC36D /* chat_decibel_4@2x.png */,
+				D4BEBA9E1D50AB3300CCC36D /* chat_decibel_5@2x.png */,
+				D4BEBA9F1D50AB3300CCC36D /* chat_decibel_6@2x.png */,
+				D4BEBAA01D50AB3300CCC36D /* chat_decibel_7@2x.png */,
+				D4BEBAA11D50AB3300CCC36D /* chat_decibel_8@2x.png */,
+				D4BEBAA21D50AB3300CCC36D /* chat_decibel_9@2x.png */,
 				D4BEBA971D50830900CCC36D /* chat_send_failed@2x.png */,
 				D4BEBA8B1D507C4700CCC36D /* chat_receive_voice_1@2x.png */,
 				D4BEBA8C1D507C4700CCC36D /* chat_receive_voice_2@2x.png */,
@@ -359,6 +389,7 @@
 			files = (
 				D4BEBA7F1D507BC400CCC36D /* chat_bottom_voice_press@2x.png in Resources */,
 				D4BEBA941D507C4700CCC36D /* chat_send_voice_1@2x.png in Resources */,
+				D4BEBAAA1D50AB3300CCC36D /* chat_decibel_7@2x.png in Resources */,
 				D4BEBA931D507C4700CCC36D /* chat_receive_voice_3@2x.png in Resources */,
 				D4697F751D48809400138CB9 /* LaunchScreen.storyboard in Resources */,
 				D4BEBA961D507C4700CCC36D /* chat_send_voice_3@2x.png in Resources */,
@@ -367,12 +398,21 @@
 				D4BEBA881D507BC400CCC36D /* receive_bubble_normal@2x.png in Resources */,
 				D4697F721D48809400138CB9 /* Assets.xcassets in Resources */,
 				D4BEBA891D507BC400CCC36D /* send_bubber_normal@2x.png in Resources */,
+				D4BEBAA81D50AB3300CCC36D /* chat_decibel_5@2x.png in Resources */,
 				D4BEBA811D507BC400CCC36D /* chat_input_pic@2x.png in Resources */,
 				D4BEBA7B1D507BC400CCC36D /* cat.jpg in Resources */,
+				D4BEBAA71D50AB3300CCC36D /* chat_decibel_4@2x.png in Resources */,
 				D4BEBA8A1D507BC400CCC36D /* toolbar_bottom_bar@2x.png in Resources */,
+				D4BEBAAB1D50AB3300CCC36D /* chat_decibel_8@2x.png in Resources */,
+				D4BEBAA41D50AB3300CCC36D /* chat_decibel_1@2x.png in Resources */,
 				D4697F701D48809400138CB9 /* Main.storyboard in Resources */,
+				D4BEBAAC1D50AB3300CCC36D /* chat_decibel_9@2x.png in Resources */,
 				D4BEBA921D507C4700CCC36D /* chat_receive_voice_2@2x.png in Resources */,
+				D4BEBAA91D50AB3300CCC36D /* chat_decibel_6@2x.png in Resources */,
 				D4BEBA911D507C4700CCC36D /* chat_receive_voice_1@2x.png in Resources */,
+				D4BEBAA31D50AB3300CCC36D /* chat_decibel_0@2x.png in Resources */,
+				D4BEBAA61D50AB3300CCC36D /* chat_decibel_3@2x.png in Resources */,
+				D4BEBAA51D50AB3300CCC36D /* chat_decibel_2@2x.png in Resources */,
 				D4BEBA7D1D507BC400CCC36D /* chat_bottom_textfield@2x.png in Resources */,
 				D4BEBA981D50830900CCC36D /* chat_send_failed@2x.png in Resources */,
 				D4BEBA7E1D507BC400CCC36D /* chat_bottom_up_nor@2x.png in Resources */,
