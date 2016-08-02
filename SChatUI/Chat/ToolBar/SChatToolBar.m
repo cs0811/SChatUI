@@ -75,7 +75,6 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (textField.text && textField.text.length>0) {
         [self routerEventWithName:@"SChatToolBarSendTextEvent" userInfo:@{@"text":textField.text}];
-        [textField resignFirstResponder];
         textField.text = @"";
     }
     return YES;

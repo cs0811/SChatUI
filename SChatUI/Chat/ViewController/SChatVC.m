@@ -213,10 +213,11 @@
     [_dataArr addObject:imgModel];
     [self.chatTable insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:_dataArr.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationRight];
     [self scrrollToEnd];
+    [self layoutAfterInsertRow];
     
     // 模拟
-    [self performSelector:@selector(sendNetworkMessage:) withObject:@{@"start":@1,@"success":@0,@"failed":@0} afterDelay:0];
-    [self performSelector:@selector(sendNetworkMessage:) withObject:@{@"start":@0,@"success":@1,@"failed":@0} afterDelay:2];
+    [self performSelector:@selector(sendNetworkMessage:) withObject:@{@"start":@1,@"success":@0,@"failed":@0,@"data":imgModel,@"dataClass":imgModel.class} afterDelay:0];
+    [self performSelector:@selector(sendNetworkMessage:) withObject:@{@"start":@0,@"success":@1,@"failed":@0,@"data":imgModel,@"dataClass":imgModel.class} afterDelay:2];
 }
 
 /**
@@ -230,6 +231,16 @@
     } completion:^(BOOL finished) {
         Sself
         [wself.chatTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:sself->_dataArr.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+    }];
+}
+
+- (void)layoutAfterInsertRow {
+    Wself
+    CGFloat h = [self tableView:self.chatTable heightForRowAtIndexPath:[NSIndexPath indexPathForRow:_dataArr.count-1 inSection:0]];
+    [UIView animateWithDuration:_systemAnimationTime animations:^{
+        wself.chatTable.contentInset = UIEdgeInsetsMake(wself.chatTable.contentInset.top-h, 0, 0, 0);
+    } completion:^(BOOL finished) {
+        
     }];
 }
 
@@ -289,6 +300,8 @@
                                           otherButtonTitles:@"拍照", @"相册",nil];
             actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
             [actionSheet showInView:self.view];
+            
+            return;
         }
     }else if ([eventName isEqualToString:@"SChatToolBarSendTextEvent"]) {
         // 发送文字
@@ -299,7 +312,11 @@
         [_dataArr addObject:textModel];
         [self.chatTable insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:_dataArr.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationRight];
         [self scrrollToEnd];
+        [self layoutAfterInsertRow];
         
+        // 模拟
+        [self performSelector:@selector(sendNetworkMessage:) withObject:@{@"start":@1,@"success":@0,@"failed":@0,@"data":textModel,@"dataClass":textModel.class} afterDelay:0];
+        [self performSelector:@selector(sendNetworkMessage:) withObject:@{@"start":@0,@"success":@0,@"failed":@1,@"data":textModel,@"dataClass":textModel.class} afterDelay:2];
     }else if ([eventName isEqualToString:@"SChatToolBarRecordDidFinishEvent"]) {
         // 发送语音
         NSString * url = userInfo[@"recordUrl"];
@@ -312,15 +329,41 @@
         [_dataArr addObject:recordModel];
         [self.chatTable insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:_dataArr.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationRight];
         [self scrrollToEnd];
+        [self layoutAfterInsertRow];
+        
+        // 模拟
+        [self performSelector:@selector(sendNetworkMessage:) withObject:@{@"start":@1,@"success":@0,@"failed":@0,@"data":recordModel,@"dataClass":recordModel.class} afterDelay:0];
+        [self performSelector:@selector(sendNetworkMessage:) withObject:@{@"start":@0,@"success":@1,@"failed":@0,@"data":recordModel,@"dataClass":recordModel.class} afterDelay:2];
+        
+    }else if ([eventName isEqualToString:@"SChatCellResendMessageEvent"]) {
+        // 重新发送
+        
+        // 模拟
+        [self performSelector:@selector(sendNetworkMessage:) withObject:@{@"start":@1,@"success":@0,@"failed":@0,@"data":userInfo[@"data"],@"dataClass":userInfo[@"dataClass"]} afterDelay:0];
+        [self performSelector:@selector(sendNetworkMessage:) withObject:@{@"start":@0,@"success":@1,@"failed":@0,@"data":userInfo[@"data"],@"dataClass":userInfo[@"dataClass"]} afterDelay:2];
         
     }
-    [self performSelector:@selector(sendNetworkMessage:) withObject:@{@"start":@1,@"success":@0,@"failed":@0} afterDelay:0];
-    [self performSelector:@selector(sendNetworkMessage:) withObject:@{@"start":@0,@"success":@1,@"failed":@0} afterDelay:2];
+    
 }
 
 // 模拟联网发送消息
 - (void)sendNetworkMessage:(NSDictionary *)dic {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"kSendStatusDidChange" object:dic];
+    ChatBaseCell * cell = nil;
+    if ([dic[@"start"] boolValue]) {
+        // 开始发送
+        NSArray<ChatBaseCell *> * cellArr = self.chatTable.visibleCells;
+        cell = [cellArr lastObject];
+    }else if ([dic[@"success"] boolValue]) {
+        // 成功
+        NSInteger row = [_dataArr indexOfObject:dic[@"data"]];
+        cell = [self.chatTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]];
+    }else if ([dic[@"failed"] boolValue]) {
+        // 失败
+        NSInteger row = [_dataArr indexOfObject:dic[@"data"]];
+        cell = [self.chatTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]];
+    }
+    
+    [cell layoutWarningViewWithDict:dic];
 }
 
 #pragma mark getter

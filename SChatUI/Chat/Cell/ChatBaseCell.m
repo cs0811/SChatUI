@@ -8,9 +8,13 @@
 
 #import "ChatBaseCell.h"
 #import "ChatBaseModel.h"
+#import "UIResponder+Router.h"
 
 
 @interface ChatBaseCell ()
+{
+    NSDictionary * _dict;
+}
 /**
  *  收到信息的头像
  */
@@ -19,7 +23,7 @@
  *  发出信息的头像
  */
 @property (nonatomic, strong) UIImageView * rightAuthorView;
-@property (nonatomic, strong) UIView * warningView;       // 发送失败警告
+@property (nonatomic, strong) UIImageView * warningView;       // 发送失败警告
 @end
 
 @implementation ChatBaseCell
@@ -34,8 +38,6 @@
 
 #pragma mark loadUI
 - (void)loadUI {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendStatusDidChange:) name:@"kSendStatusDidChange" object:nil];
-    
     self.backgroundColor = [UIColor whiteColor];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     Wself
@@ -82,7 +84,7 @@
     self.leftBubbleView.hidden = bModel.isSender;
     self.rightAuthorView.hidden = !bModel.isSender;
     self.rightBubbleView.hidden = !bModel.isSender;
-    self.warningView.hidden = !bModel.isSender;
+    self.warningView.hidden = YES;
     
     // 加载头像
     [self.leftAuthorView sd_setImageWithURL:[NSURL URLWithString:bModel.sendAuthorImg] placeholderImage:[UIImage imageNamed:ReceiverPlaceHolderImg]];
@@ -90,29 +92,45 @@
 }
 
 #pragma mark action
-- (void)sendStatusDidChange:(NSNotification *)sender {
-    // @{@"start":@1,@"success":@0,@"failed":@0}
-    NSDictionary * dic = sender.object;
-    
-    if (dic[@"start"]) {
+- (void)layoutWarningViewWithDict:(NSDictionary *)dic {
+    // @{@"start":@1,@"success":@0,@"failed":@0}    
+    if ([dic[@"start"] boolValue]) {
+        self.warningView.hidden = NO;
+        self.warningView.image = nil;
+        self.warningView.userInteractionEnabled = NO;
+
         // 发送中
         UIActivityIndicatorView * activity = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         [activity startAnimating];
         activity.backgroundColor = [UIColor whiteColor];
+        self.warningView.image = nil;
         [self.warningView addSubview:activity];
-    }else if (dic[@"success"]) {
+    }else if ([dic[@"success"] boolValue]) {
+        self.warningView.hidden = YES;
+        self.warningView.image = nil;
+        self.warningView.userInteractionEnabled = NO;
         // 成功
         for (int i=0; i<self.warningView.subviews.count; i++) {
             [self.warningView.subviews[i] removeFromSuperview];
         }
-    }else if (dic[@"failed"]) {
+    }else if ([dic[@"failed"] boolValue]) {
+        self.warningView.hidden = NO;
+        self.warningView.userInteractionEnabled = YES;
         // 失败
         for (int i=0; i<self.warningView.subviews.count; i++) {
             [self.warningView.subviews[i] removeFromSuperview];
         }
+        self.warningView.image = [UIImage imageNamed:SendFailedImg];
+        _dict = dic;
     }
     
-    
+}
+
+/**
+ *  发送之后，可以重新发送消息
+ */
+- (void)resendMessage {
+    [self routerEventWithName:@"SChatCellResendMessageEvent" userInfo:_dict?:@{}];
 }
 
 #pragma mark getter
@@ -160,15 +178,14 @@
     }
     return _rightBubbleView;
 }
-- (UIView *)warningView {
+- (UIImageView *)warningView {
     if (!_warningView) {
-        _warningView = [UIView new];
+        _warningView = [UIImageView new];
+        
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(resendMessage)];
+        [_warningView addGestureRecognizer:tap];
     }
     return _warningView;
-}
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

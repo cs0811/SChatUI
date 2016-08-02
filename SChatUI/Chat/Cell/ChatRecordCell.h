@@ -21,8 +21,8 @@
 #define RecordBuddleMinW                90.
 
 
-#define RecordLeftImg                   @"chat_bottom_voice_press"
-#define RecordRightImg                  @"chat_bottom_voice_pressR"
+#define RecordLeftImg                   @"chat_receive_voice_3"
+#define RecordRightImg                  @"chat_send_voice_3"
 
 @interface ChatRecordCell : ChatBaseCell
 

@@ -52,6 +52,10 @@
 #define ReceiverPlaceHolderImg          @"cat.jpg"
 #define ReceiverBubbleImg               @"receive_bubble_normal"
 
+/**
+ *  发送失败图片
+ */
+#define SendFailedImg                   @"chat_send_failed"
 
 
 @class ChatBaseModel;
@@ -65,5 +69,7 @@
  *  加载数据 (.PS 子类重写此方法，添加各自的控件)
  */
 - (void)reloadUIWithData:(ChatBaseModel *)bModel;
+
+- (void)layoutWarningViewWithDict:(NSDictionary *)dic;
 
 @end

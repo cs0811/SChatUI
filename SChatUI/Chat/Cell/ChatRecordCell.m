@@ -106,10 +106,29 @@
 - (void)leftReplayRecord {
     self.recordHandle = [SChatRecordHandle new];
     [self.recordHandle repalyRecordWithUrl:_model.receiveUrl];
+    
+    // 播放动画
+    [self replayVoiceWithImgStr:@"chat_receive_voice_" onImageView:self.leftImg];
 }
 - (void)rightReplayRecord {
     self.recordHandle = [SChatRecordHandle new];
     [self.recordHandle repalyRecordWithUrl:_model.sendUrl];
+    
+    // 播放动画
+    [self replayVoiceWithImgStr:@"chat_send_voice_" onImageView:self.rightImg];
+}
+
+- (void)replayVoiceWithImgStr:(NSString *)str onImageView:(UIImageView *)imageView {
+    NSMutableArray * images = [NSMutableArray array];
+    for (int i=1; i<4; i++) {
+        UIImage * img = [UIImage imageNamed:[NSString stringWithFormat:@"%@%d",str,i]];
+        [images addObject:img];
+    }
+    imageView.animationImages = images;
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    imageView.animationDuration = 1;
+    imageView.animationRepeatCount = _model.timeLength;
+    [imageView startAnimating];
 }
 
 #pragma mark getter
