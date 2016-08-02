@@ -131,6 +131,10 @@
     [imageView startAnimating];
 }
 
+-(BOOL)canBecomeFirstResponder {
+    return NO;
+}
+
 #pragma mark getter
 - (UIImageView *)leftImg {
     if (!_leftImg) {

@@ -59,6 +59,15 @@
     
 }
 
+// 重写父视图方法
+- (void)menuCopyBtnPressed {
+    if (self.leftLabel.text && self.leftLabel.text.length>0) {
+        [UIPasteboard generalPasteboard].string = self.leftLabel.text;
+    }else {
+        [UIPasteboard generalPasteboard].string = self.rightLabel.text;
+    }
+}
+
 #pragma mark getter
 - (UILabel *)leftLabel {
     if (!_leftLabel) {

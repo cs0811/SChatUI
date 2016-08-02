@@ -127,10 +127,35 @@
 }
 
 /**
- *  发送之后，可以重新发送消息
+ *  失败之后，可以重新发送消息
  */
 - (void)resendMessage {
     [self routerEventWithName:@"SChatCellResendMessageEvent" userInfo:_dict?:@{}];
+}
+
+- (void)menuClick:(UILongPressGestureRecognizer *)sender {
+    [self becomeFirstResponder];
+
+    UIMenuController *menuController = [UIMenuController sharedMenuController];
+    UIMenuItem *copyItem = [[UIMenuItem alloc] initWithTitle:@"复制" action:@selector(menuCopyBtnPressed)];
+    menuController.menuItems = @[copyItem];
+    [menuController setTargetRect:sender.view.frame inView:sender.view.superview];
+    [menuController setMenuVisible:YES animated:YES];
+    [UIMenuController sharedMenuController].menuItems=nil;
+}
+
+// 子视图重写
+- (void)menuCopyBtnPressed {
+}
+
+-(BOOL)canBecomeFirstResponder {
+    return YES;
+}
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
+    if (action == @selector(menuCopyBtnPressed)) {
+        return YES;
+    }
+    return NO;
 }
 
 #pragma mark getter
@@ -153,6 +178,9 @@
         UIImage * tempImage = [UIImage imageNamed:ReceiverBubbleImg];
         tempImage = [tempImage resizableImageWithCapInsets:UIEdgeInsetsMake(30, 30, 10, 20) resizingMode:UIImageResizingModeStretch];
         _leftBubbleView.image = tempImage;
+        
+        UILongPressGestureRecognizer * longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(menuClick:)];
+        [_leftBubbleView addGestureRecognizer:longPress];
     }
     return _leftBubbleView;
 }
@@ -175,6 +203,9 @@
         UIImage * tempImage = [UIImage imageNamed:SenderBubbleImg];
         tempImage = [tempImage resizableImageWithCapInsets:UIEdgeInsetsMake(30, 20, 10, 30) resizingMode:UIImageResizingModeStretch];
         _rightBubbleView.image = tempImage;
+        
+        UILongPressGestureRecognizer * longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(menuClick:)];
+        [_rightBubbleView addGestureRecognizer:longPress];
     }
     return _rightBubbleView;
 }
