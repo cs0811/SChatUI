@@ -60,34 +60,57 @@
     if (bModel.isSender) {
         if (model.sendLocalImg) {
             [self resizeImage:model.sendLocalImg onView:self.rightImg];
-            _largeImg = model.sendLocalImg;
         }else {
-            [self loadImg:model.sendImg onView:self.rightImg];
+            [self loadImg:model.sendImg onView:self.rightImg width:model.imgW height:model.imgH];
         }
         self.leftImg.image = nil;
     }else {
-        [self loadImg:model.receiveImg onView:self.leftImg];
+        [self loadImg:model.receiveImg onView:self.leftImg width:model.imgW height:model.imgH];
         self.rightImg.image = nil;
     }
 }
 
 // 数据加工
-- (void)loadImg:(NSString *)img onView:(UIImageView *)imageView {
+- (void)loadImg:(NSString *)img onView:(UIImageView *)imageView width:(float)width height:(float)height {
     Wself
     if ([img hasPrefix:@"http"] || [img rangeOfString:@"/"].location != NSNotFound) {
-        [imageView sd_setImageWithURL:[NSURL URLWithString:img] placeholderImage:nil options:SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            Sself
-            [wself resizeImage:image onView:imageView];
-            sself->_largeImg = image;
+        UIImage * placeHolderImg = [self resizePlaceHolderImage:PlaceHolderImg width:width height:height];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:img] placeholderImage:placeHolderImg options:SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            if (image) {
+                [wself resizeImage:image onView:imageView];
+            }
         }];
     }else {
         UIImage * image = [UIImage imageNamed:img];
-        [self resizeImage:image onView:imageView];
-        _largeImg = image;
+        if (image) {
+            [self resizeImage:image onView:imageView];
+        }
     }
 }
 
+- (UIImage *)resizePlaceHolderImage:(NSString *)image width:(float)width height:(float)height {
+    if (!image) {
+        return nil;
+    }
+    UIImage * oldImg = [UIImage imageNamed:image];
+    if (!oldImg) {
+        return nil;
+    }
+    CGFloat w = BubbleMaxWidth-LeftSpaceImg-RightSpaceImg-5;
+    if (width<w) {
+        w = width;
+    }
+    CGFloat h = w*height/width;
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(w, h), 0, [UIScreen mainScreen].scale);
+    [oldImg drawInRect:CGRectMake(0, 0, w, h)];
+    UIImage * tempImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return  tempImage;
+}
+
 - (void)resizeImage:(UIImage *)image onView:(UIImageView *)imageView {
+    _largeImg = image;
+
     CGFloat width = BubbleMaxWidth-LeftSpaceImg-RightSpaceImg-5;
     if (image.size.width<width) {
         width = image.size.width;
@@ -127,6 +150,9 @@
  *  展示原图
  */
 - (void)showLargeImage:(UITapGestureRecognizer *)sender {
+    if (!_largeImg) {
+        return;
+    }
     
     UIWindow * window = [[UIApplication sharedApplication].delegate window];
     

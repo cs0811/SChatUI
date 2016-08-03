@@ -14,6 +14,9 @@
 #define BottomSpaceImg          15.
 #define RightSpaceImg           15.
 
+
+#define PlaceHolderImg          @"chat_placeHolderImg"
+
 @interface ChatImageCell : ChatBaseCell
 
 @end

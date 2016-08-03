@@ -68,7 +68,9 @@
 
 - (void)fetch {
     ChatImageModel * imgModel = [ChatImageModel new];
-    imgModel.receiveImg = @"cat.jpg";
+    imgModel.receiveImg = @"http://img.ivsky.com/img/tupian/pre/201606/28/titian-002.jpg";
+    imgModel.imgW = 200;
+    imgModel.imgH = 150;
     imgModel.isSender = 0;
     
     ChatTextModel * textModel = [ChatTextModel new];
