@@ -169,16 +169,44 @@
     largeImg.center = window.center;
     [baseView addSubview:largeImg];
     
+    UIButton * saveBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    saveBtn.frame = CGRectMake(ScreenWidth-100, ScreenHeight-60, 80, 30);
+    [saveBtn setTitle:@"保 存" forState:UIControlStateNormal];
+    [saveBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    saveBtn.layer.borderWidth = 1;
+    saveBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+    saveBtn.layer.cornerRadius = 5;
+    saveBtn.titleLabel.font = [UIFont systemFontOfSize:15.];
+    [saveBtn addTarget:self action:@selector(savePic) forControlEvents:UIControlEventTouchUpInside];
+    [baseView addSubview:saveBtn];
+    
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showSmallImage:)];
     [baseView addGestureRecognizer:tap];
+}
+
+- (void)savePic {
+    if (!_largeImg) {
+        return;
+    }
+    UIImageWriteToSavedPhotosAlbum(_largeImg, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
+}
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+    if (error == nil) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"已存入手机相册" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+        [alert show];
+        
+    }else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"保存失败" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+        [alert show];
+    }
 }
 
 /**
  *  展示小图
  */
 - (void)showSmallImage:(UITapGestureRecognizer *)sender {
-    [sender.view removeFromSuperview];
     [sender.view.superview removeFromSuperview];
+    [sender.view removeFromSuperview];
 }
 
 #pragma mark getter

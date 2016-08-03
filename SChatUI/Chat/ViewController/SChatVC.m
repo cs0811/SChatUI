@@ -215,7 +215,7 @@
     [_dataArr addObject:imgModel];
     [self.chatTable insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:_dataArr.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationRight];
     [self scrrollToEnd];
-    [self layoutAfterInsertRow];
+//    [self layoutAfterInsertRow];
     
     // 模拟
     [self performSelector:@selector(sendNetworkMessage:) withObject:@{@"start":@1,@"success":@0,@"failed":@0,@"data":imgModel,@"dataClass":imgModel.class} afterDelay:0];
