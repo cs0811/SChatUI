@@ -81,6 +81,12 @@
 }
 
 #pragma mark action
+- (void)observeChatText:(UITextField *)sender {
+    // 弹出选择项时，输入无效
+    if (self.rightBtn.selected) {
+        sender.text = @"";
+    }
+}
 // 右边按钮事件
 - (void)rightBtnClick:(UIButton *)sender {
     sender.selected = !sender.selected;
@@ -182,7 +188,7 @@
         _inputTF.background = tempImage;
         _inputTF.returnKeyType = UIReturnKeySend;
         _inputTF.delegate = self;
-
+        [_inputTF addTarget:self action:@selector(observeChatText:) forControlEvents:UIControlEventEditingChanged];
     }
     return _inputTF;
 }

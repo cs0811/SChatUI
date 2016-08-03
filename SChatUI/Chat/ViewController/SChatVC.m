@@ -357,21 +357,23 @@
 
 // 模拟联网发送消息
 - (void)sendNetworkMessage:(NSDictionary *)dic {
-    ChatBaseCell * cell = nil;
-    if ([dic[@"start"] boolValue]) {
-        // 开始发送
-        NSArray<ChatBaseCell *> * cellArr = self.chatTable.visibleCells;
-        cell = [cellArr lastObject];
-    }else if ([dic[@"success"] boolValue]) {
-        // 成功
-        NSInteger row = [_dataArr indexOfObject:dic[@"data"]];
-        cell = [self.chatTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]];
-    }else if ([dic[@"failed"] boolValue]) {
-        // 失败
-        NSInteger row = [_dataArr indexOfObject:dic[@"data"]];
-        cell = [self.chatTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]];
-    }
+//    ChatBaseCell * cell = nil;
+//    if ([dic[@"start"] boolValue]) {
+//        // 开始发送
+//        NSInteger row = [_dataArr indexOfObject:dic[@"data"]];
+//        cell = [self.chatTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]];
+//    }else if ([dic[@"success"] boolValue]) {
+//        // 成功
+//        NSInteger row = [_dataArr indexOfObject:dic[@"data"]];
+//        cell = [self.chatTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]];
+//    }else if ([dic[@"failed"] boolValue]) {
+//        // 失败
+//        NSInteger row = [_dataArr indexOfObject:dic[@"data"]];
+//        cell = [self.chatTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]];
+//    }
     
+    NSInteger row = [_dataArr indexOfObject:dic[@"data"]];
+    ChatBaseCell * cell = [self.chatTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]];
     [cell layoutWarningViewWithDict:dic];
 }
 
