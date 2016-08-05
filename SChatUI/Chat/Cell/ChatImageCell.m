@@ -39,13 +39,13 @@
         make.left.equalTo(wself.leftBubbleView).offset(LeftSpaceImg+5);
         make.top.equalTo(wself.leftBubbleView).offset(TopSpaceImg);
         make.right.equalTo(wself.leftBubbleView).offset(-RightSpaceImg);
-        make.bottom.equalTo(wself.leftBubbleView).offset(-BottomSpaceImg);
+        make.bottom.equalTo(wself.leftBubbleView).offset(-BottomSpaceImg).priority(300);
     }];
     [self.rightImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(wself.rightBubbleView).offset(RightSpaceImg);
         make.top.equalTo(wself.rightBubbleView).offset(TopSpaceImg);
         make.right.equalTo(wself.rightBubbleView).offset(-LeftSpaceImg-5);
-        make.bottom.equalTo(wself.rightBubbleView).offset(-BottomSpaceImg);
+        make.bottom.equalTo(wself.rightBubbleView).offset(-BottomSpaceImg).priority(300);
     }];
 }
 
@@ -57,6 +57,7 @@
     self.rightImg.hidden = !bModel.isSender;
     
     ChatImageModel * model = (ChatImageModel *)bModel;
+    
     if (bModel.isSender) {
         if (model.sendLocalImg) {
             [self resizeImage:model.sendLocalImg onView:self.rightImg];
@@ -118,22 +119,20 @@
         return;
     }
     CGFloat height = width*image.size.height/image.size.width;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSData * imageData = UIImageJPEGRepresentation(image, 0.5);
+        UIImage * image1 = [UIImage imageWithData:imageData];
+        UIGraphicsBeginImageContextWithOptions(CGSizeMake(width, height), 0, [UIScreen mainScreen].scale);
+        [image1 drawInRect:CGRectMake(0, 0, width, height)];
+        UIImage * tempImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        dispatch_async(dispatch_get_main_queue(), ^{
+            imageView.image = tempImage;
+        });
+    });
     
-    /*
-     *  放在线程里面处理图片，不能自适应cell，未知？
-     */
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//        });
-//    });
-    
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(width, height), 0, [UIScreen mainScreen].scale);
-    [image drawInRect:CGRectMake(0, 0, width, height)];
-    UIImage * tempImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    imageView.image = tempImage;
     [imageView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(height).priority(300);
+        make.height.mas_equalTo(height);
     }];
 }
 
@@ -202,7 +201,7 @@
 }
 
 /**
- *  展示小图
+ *  返回小图
  */
 - (void)showSmallImage:(UITapGestureRecognizer *)sender {
     [sender.view.superview removeFromSuperview];

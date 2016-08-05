@@ -32,6 +32,10 @@
 }
 @property (nonatomic, strong) UITableView * chatTable;
 @property (nonatomic, strong) SChatToolBar * chatToolBar;
+
+@property (nonatomic, strong) ChatTextCell * textCell;
+@property (nonatomic, strong) ChatImageCell * imageCell;
+@property (nonatomic, strong) ChatRecordCell * recordCell;
 @end
 
 
@@ -62,8 +66,13 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboradWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboradWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
+    self.textCell = [self.chatTable dequeueReusableCellWithIdentifier:@"ChatTextCell"];
+    self.imageCell = [self.chatTable dequeueReusableCellWithIdentifier:@"ChatImageCell"];
+    self.recordCell = [self.chatTable dequeueReusableCellWithIdentifier:@"ChatRecordCell"];
+ 
     // 模拟下载
     [self performSelector:@selector(fetch) withObject:nil afterDelay:0.5];
+    
 }
 
 - (void)fetch {
@@ -101,7 +110,6 @@
         [cell reloadUIWithData:_dataArr[indexPath.row]];
         return cell;
 
-
     }else if ([model isKindOfClass:[ChatImageModel class]]){
         ChatImageCell * cell = [tableView dequeueReusableCellWithIdentifier:@"ChatImageCell"];
         [cell reloadUIWithData:_dataArr[indexPath.row]];
@@ -111,7 +119,6 @@
         ChatRecordCell * cell = [tableView dequeueReusableCellWithIdentifier:@"ChatRecordCell"];
         [cell reloadUIWithData:_dataArr[indexPath.row]];
         return cell;
-        
     }
     return nil;
 }
@@ -121,22 +128,15 @@
     id model = _dataArr[indexPath.row];
     
     if ([model isKindOfClass:[ChatTextModel class]]) {
-        ChatTextCell * cell = [tableView dequeueReusableCellWithIdentifier:@"ChatTextCell"];
-        [cell reloadUIWithData:_dataArr[indexPath.row]];
-        return [cell systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-        
-        
+        [self.textCell reloadUIWithData:_dataArr[indexPath.row]];
+        return [self.textCell systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
     }else if ([model isKindOfClass:[ChatImageModel class]]){
-        ChatImageCell * cell = [tableView dequeueReusableCellWithIdentifier:@"ChatImageCell"];
-        [cell reloadUIWithData:_dataArr[indexPath.row]];
-        return [cell systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-        
+        [self.imageCell reloadUIWithData:_dataArr[indexPath.row]];
+        return [self.imageCell systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
     }
     else if ([model isKindOfClass:[ChatRecordModel class]]){
-        ChatRecordCell * cell = [tableView dequeueReusableCellWithIdentifier:@"ChatRecordCell"];
-        [cell reloadUIWithData:_dataArr[indexPath.row]];
-        return [cell systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-        
+        [self.recordCell reloadUIWithData:_dataArr[indexPath.row]];
+        return [self.recordCell systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
     }
     return 0;
 }
