@@ -9,13 +9,9 @@
 #import <UIKit/UIKit.h>
 
 /**
- *  item宽
+ *  item宽高比(宽/高)
  */
-#define ToolBarInputViewItemW               60.
-/**
- *  item高
- */
-#define ToolBarInputViewItemH               80.
+#define ToolBarInputViewItemRatio           3/3.5
 /**
  *  左右边距
  */
@@ -28,6 +24,10 @@
  *  item间距（竖直）
  */
 #define ToolBarInputViewItemSpaceV          5.
+/**
+ *  item间距（水平）
+ */
+#define ToolBarInputViewItemSpaceH          10.
 /**
  *  每行的最大个数
  */

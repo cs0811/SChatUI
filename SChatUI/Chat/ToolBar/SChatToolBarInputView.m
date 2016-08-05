@@ -37,11 +37,11 @@
     
     [self.iconImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(wself);
-        make.height.equalTo(wself).multipliedBy(0.7);
+        make.height.equalTo(wself).multipliedBy(0.6);
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(wself);
-        make.top.equalTo(wself.iconImg.mas_bottom).offset(5);
+        make.top.equalTo(wself.iconImg.mas_bottom);
     }];
 }
 
@@ -49,13 +49,14 @@
 - (UIImageView *)iconImg {
     if (!_iconImg) {
         _iconImg = [UIImageView new];
+        _iconImg.contentMode = UIViewContentModeScaleAspectFit;
     }
     return _iconImg;
 }
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
         _titleLabel = [UILabel new];
-        _titleLabel.font = [UIFont systemFontOfSize:12.];
+        _titleLabel.font = [UIFont systemFontOfSize:17.];
         _titleLabel.textColor = [UIColor lightGrayColor];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
     }
@@ -103,11 +104,19 @@
         if (self.allItems.count%ToolBarInputViewMaxLineNum != 0 ) {
             lines = lines+1;
         }
-        CGFloat h = ToolBarInputViewItemH*lines+2*ToolBarInputViewTopSpace+(lines-1)*ToolBarInputViewItemSpaceV;
+        
+        CGFloat itemW = 0;
+        itemW = (ScreenWidth-2*ToolBarInputViewLeftSpace-(ToolBarInputViewMaxLineNum-1)*ToolBarInputViewItemSpaceH)/ToolBarInputViewMaxLineNum;
+        CGFloat ratio = ToolBarInputViewItemRatio;
+        CGFloat itemH = itemW/ratio;
+        CGFloat h = itemH*lines+2*ToolBarInputViewTopSpace+(lines-1)*ToolBarInputViewItemSpaceV;
+        
+        UIEdgeInsets insets = UIEdgeInsetsMake(ToolBarInputViewTopSpace, ToolBarInputViewLeftSpace, ToolBarInputViewTopSpace, ToolBarInputViewLeftSpace);
         
         UICollectionViewFlowLayout * layout = [UICollectionViewFlowLayout new];
         layout.scrollDirection = UICollectionViewScrollDirectionVertical;
-        layout.itemSize = CGSizeMake(ToolBarInputViewItemW, ToolBarInputViewItemH);
+        layout.itemSize = CGSizeMake(itemW, itemH);
+        layout.sectionInset = insets;
         _inputColleciton = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, h) collectionViewLayout:layout];
         _inputColleciton.backgroundColor = [UIColor whiteColor];
         _inputColleciton.delegate = self;
@@ -136,9 +145,6 @@
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     [[NSNotificationCenter defaultCenter]postNotificationName:@"kInputViewItemDidChoose" object:nil];
     [self routerEventWithName:@"SChatToolBarInputViewItemEvent" userInfo:@{@"itemIndex":@(indexPath.row)}];
-}
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(ToolBarInputViewTopSpace, ToolBarInputViewLeftSpace, ToolBarInputViewTopSpace, ToolBarInputViewLeftSpace);
 }
 
 @end
