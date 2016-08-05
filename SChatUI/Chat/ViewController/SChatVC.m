@@ -72,7 +72,6 @@
  
     // 模拟下载
     [self performSelector:@selector(fetch) withObject:nil afterDelay:0.5];
-    
 }
 
 - (void)fetch {
@@ -358,19 +357,29 @@
 // 模拟联网发送消息
 - (void)sendNetworkMessage:(NSDictionary *)dic {
 //    ChatBaseCell * cell = nil;
-//    if ([dic[@"start"] boolValue]) {
-//        // 开始发送
-//        NSInteger row = [_dataArr indexOfObject:dic[@"data"]];
-//        cell = [self.chatTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]];
-//    }else if ([dic[@"success"] boolValue]) {
-//        // 成功
-//        NSInteger row = [_dataArr indexOfObject:dic[@"data"]];
-//        cell = [self.chatTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]];
-//    }else if ([dic[@"failed"] boolValue]) {
-//        // 失败
-//        NSInteger row = [_dataArr indexOfObject:dic[@"data"]];
-//        cell = [self.chatTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]];
-//    }
+    if ([dic[@"start"] boolValue]) {
+        // 开始发送
+        if ([dic[@"data"] isKindOfClass:[ChatBaseModel class]]) {
+            [(ChatBaseModel *)dic[@"data"] setStart:YES];
+            [(ChatBaseModel *)dic[@"data"] setSuccess:NO];
+            [(ChatBaseModel *)dic[@"data"] setFailed:NO];
+        }
+    }else if ([dic[@"success"] boolValue]) {
+        // 成功
+        if ([dic[@"data"] isKindOfClass:[ChatBaseModel class]]) {
+            [(ChatBaseModel *)dic[@"data"] setStart:NO];
+            [(ChatBaseModel *)dic[@"data"] setSuccess:YES];
+            [(ChatBaseModel *)dic[@"data"] setFailed:NO];
+        }
+    }else if ([dic[@"failed"] boolValue]) {
+        // 失败
+        if ([dic[@"data"] isKindOfClass:[ChatBaseModel class]]) {
+            [(ChatBaseModel *)dic[@"data"] setStart:NO];
+            [(ChatBaseModel *)dic[@"data"] setSuccess:NO];
+            [(ChatBaseModel *)dic[@"data"] setFailed:YES];
+            [(ChatBaseModel *)dic[@"data"] setResendData:dic];
+        }
+    }
     
     NSInteger row = [_dataArr indexOfObject:dic[@"data"]];
     ChatBaseCell * cell = [self.chatTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]];

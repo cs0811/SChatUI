@@ -84,46 +84,62 @@
     self.leftBubbleView.hidden = bModel.isSender;
     self.rightAuthorView.hidden = !bModel.isSender;
     self.rightBubbleView.hidden = !bModel.isSender;
-    self.warningView.hidden = YES;
+    self.warningView.image = nil;
     
     // 加载头像
     [self.leftAuthorView sd_setImageWithURL:[NSURL URLWithString:bModel.sendAuthorImg] placeholderImage:[UIImage imageNamed:ReceiverPlaceHolderImg]];
     [self.rightAuthorView sd_setImageWithURL:[NSURL URLWithString:bModel.receiveAuthorImg] placeholderImage:[UIImage imageNamed:SenderPlaceHolderImg]];
+    
+    if (bModel.start) {
+        [self waringViewStatusStart];
+    }else if (bModel.success) {
+        [self waringViewStatusSuccess];
+    }else if (bModel.failed) {
+        [self waringViewStatusFailedWithDic:bModel.resendData];
+    }else {
+        [self waringViewStatusSuccess];
+    }
 }
 
 #pragma mark action
 - (void)layoutWarningViewWithDict:(NSDictionary *)dic {
     // @{@"start":@1,@"success":@0,@"failed":@0}    
     if ([dic[@"start"] boolValue]) {
-        self.warningView.hidden = NO;
-        self.warningView.image = nil;
-        self.warningView.userInteractionEnabled = NO;
-
-        // 发送中
-        UIActivityIndicatorView * activity = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        [activity startAnimating];
-        activity.backgroundColor = [UIColor whiteColor];
-        self.warningView.image = nil;
-        [self.warningView addSubview:activity];
+        [self waringViewStatusStart];
     }else if ([dic[@"success"] boolValue]) {
-        self.warningView.hidden = YES;
-        self.warningView.image = nil;
-        self.warningView.userInteractionEnabled = NO;
-        // 成功
-        for (int i=0; i<self.warningView.subviews.count; i++) {
-            [self.warningView.subviews[i] removeFromSuperview];
-        }
+        [self waringViewStatusSuccess];
     }else if ([dic[@"failed"] boolValue]) {
-        self.warningView.hidden = NO;
-        self.warningView.userInteractionEnabled = YES;
-        // 失败
-        for (int i=0; i<self.warningView.subviews.count; i++) {
-            [self.warningView.subviews[i] removeFromSuperview];
-        }
-        self.warningView.image = [UIImage imageNamed:SendFailedImg];
-        _dict = dic;
+        [self waringViewStatusFailedWithDic:dic];
     }
-    
+}
+
+- (void)waringViewStatusStart {
+    self.warningView.image = nil;
+    self.warningView.userInteractionEnabled = NO;
+    // 发送中
+    UIActivityIndicatorView * activity = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [activity startAnimating];
+    activity.backgroundColor = [UIColor whiteColor];
+    [self.warningView addSubview:activity];
+}
+
+- (void)waringViewStatusSuccess {
+    self.warningView.image = nil;
+    self.warningView.userInteractionEnabled = NO;
+    // 成功
+    for (int i=0; i<self.warningView.subviews.count; i++) {
+        [self.warningView.subviews[i] removeFromSuperview];
+    }
+}
+
+- (void)waringViewStatusFailedWithDic:(NSDictionary *)dic {
+    self.warningView.userInteractionEnabled = YES;
+    // 失败
+    for (int i=0; i<self.warningView.subviews.count; i++) {
+        [self.warningView.subviews[i] removeFromSuperview];
+    }
+    self.warningView.image = [UIImage imageNamed:SendFailedImg];
+    _dict = dic;
 }
 
 /**

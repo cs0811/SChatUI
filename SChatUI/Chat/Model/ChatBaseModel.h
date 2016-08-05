@@ -24,4 +24,13 @@
  */
 @property (nonatomic,copy) NSString * receiveAuthorImg;
 
+
+/**
+ *  发送状态
+ */
+@property (nonatomic,assign) BOOL start;
+@property (nonatomic,assign) BOOL success;
+@property (nonatomic,assign) BOOL failed;
+@property (nonatomic,strong) id resendData;
+
 @end
