@@ -29,6 +29,7 @@
 {
     NSMutableArray * _dataArr;
     NSTimeInterval _systemAnimationTime;        // 系统动画时间
+    BOOL _keyboardChange;
 }
 @property (nonatomic, strong) UITableView * chatTable;
 @property (nonatomic, strong) SChatToolBar * chatToolBar;
@@ -57,7 +58,17 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.chatTable];
     [self.view addSubview:self.chatToolBar];
+    _keyboardChange = NO;
+}
 
+#pragma mark layout
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    
+    self.chatTable.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight-NavigationBarH-ToolBarHeight);
+    if (!_keyboardChange) {
+        self.chatToolBar.frame = CGRectMake(0, ScreenHeight-NavigationBarH-ToolBarHeight, ScreenWidth, ToolBarHeight);
+    };
 }
 
 #pragma mark loadData
@@ -249,6 +260,7 @@
 - (void)keyboradWillShow:(NSNotification *)sender {
     Wself
     NSDictionary * dic = sender.userInfo;
+    _keyboardChange = YES;
     /**
      UIKeyboardAnimationCurveUserInfoKey = 7;
      UIKeyboardAnimationDurationUserInfoKey = "0.25";
@@ -263,26 +275,27 @@
     CGRect keyboardRect = [dic[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
     CGFloat keyboardH = keyboardRect.size.height;
     
-    CGRect chatBarNewFrame = CGRectMake(0, ScreenHeight-NavigationBarH-ToolBarHeight-keyboardH, CGRectGetWidth(self.chatToolBar.frame), CGRectGetHeight(self.chatToolBar.frame));
+    CGRect chatBarNewFrame = CGRectMake(0, ScreenHeight-NavigationBarH-ToolBarHeight-keyboardH, ScreenWidth, CGRectGetHeight(self.chatToolBar.frame));
 
     [UIView animateWithDuration:[dic[UIKeyboardAnimationDurationUserInfoKey] floatValue] animations:^{
         wself.chatToolBar.frame = chatBarNewFrame;
         wself.chatTable.contentInset = UIEdgeInsetsMake(-wself.chatTable.contentSize.height+chatBarNewFrame.origin.y, 0, 0, 0);
     } completion:^(BOOL finished) {
-        
+        _keyboardChange = NO;
     }];
 }
 
 - (void)keyboradWillHide:(NSNotification *)sender {
     Wself
     NSDictionary * dic = sender.userInfo;
-    CGRect chatBarNewFrame = CGRectMake(0, ScreenHeight-NavigationBarH-ToolBarHeight, CGRectGetWidth(self.chatToolBar.frame), CGRectGetHeight(self.chatToolBar.frame));
+    _keyboardChange = YES;
+    CGRect chatBarNewFrame = CGRectMake(0, ScreenHeight-NavigationBarH-ToolBarHeight, ScreenWidth, CGRectGetHeight(self.chatToolBar.frame));
     
     [UIView animateWithDuration:[dic[UIKeyboardAnimationDurationUserInfoKey] floatValue] animations:^{
         wself.chatToolBar.frame = chatBarNewFrame;
         wself.chatTable.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     } completion:^(BOOL finished) {
-        
+        _keyboardChange = NO;
     }];
 }
 

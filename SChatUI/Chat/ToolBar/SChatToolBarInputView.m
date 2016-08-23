@@ -91,8 +91,16 @@
     if (_allItems.count >0) {
         [self.inputColleciton removeFromSuperview];
         [self addSubview:self.inputColleciton];
-        self.frame = self.inputColleciton.frame;
+        self.frame = self.inputColleciton.bounds;
     }
+}
+
+#pragma mark layout
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    CGFloat h = CGRectGetHeight(self.inputColleciton.frame);
+    self.inputColleciton.frame = CGRectMake(0, 0, ScreenWidth, h);
 }
 
 #pragma mark getter

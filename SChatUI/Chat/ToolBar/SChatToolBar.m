@@ -44,7 +44,6 @@
 
 #pragma mark loadUI
 - (void)loadUI {
-    Wself
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(inputViewItemDidChoose) name:@"kInputViewItemDidChoose" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(inputViewDidFinishRecord:) name:@"kInputViewDidFinishRecord" object:nil];
@@ -55,6 +54,11 @@
     [self addSubview:self.inputTF];
     [self addSubview:self.rightBtn];
     
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    Wself
     [self.leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.equalTo(wself).offset(ToolBarLeftSpace);
         make.bottom.equalTo(wself).offset(-ToolBarLeftSpace);
